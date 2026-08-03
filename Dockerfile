@@ -1,7 +1,7 @@
 # Offizielles Playwright-Image bringt Chromium + alle Systemabhaengigkeiten
 # schon fertig mit -- vermeidet die typischen "playwright install" Probleme
-# auf schlanken PaaS-Buildern. Version muss zur package.json passen (1.46.x).
-FROM mcr.microsoft.com/playwright:v1.46.0-jammy
+# auf schlanken PaaS-Buildern. Version muss exakt zur package.json passen.
+FROM mcr.microsoft.com/playwright:v1.61.1-jammy
 
 WORKDIR /app
 
