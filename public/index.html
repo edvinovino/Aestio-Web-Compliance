@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aestio § Web Compliance — Technisches Compliance-Audit für Websites</title>
+<meta name="description" content="Kostenloser technischer Compliance-Check für Ihre Website: Cookies & Tracking, Barrierefreiheit (BFSG), Rechtstexte, Security-Header und KI-Transparenz (EU AI Act). Ergebnis in 15 Minuten.">
+<link rel="canonical" href="https://compliance.aestio.de/">
+<meta name="robots" content="index, follow">
+
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Aestio Web Compliance">
+<meta property="og:title" content="Aestio § Web Compliance — Technisches Compliance-Audit für Websites">
+<meta property="og:description" content="Kostenloser technischer Compliance-Check: Cookies & Tracking, Barrierefreiheit, Rechtstexte, Security-Header und KI-Transparenz. Ergebnis in 15 Minuten.">
+<meta property="og:url" content="https://compliance.aestio.de/">
+<meta property="og:image" content="https://compliance.aestio.de/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="de_DE">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Aestio § Web Compliance — Technisches Compliance-Audit für Websites">
+<meta name="twitter:description" content="Kostenloser technischer Compliance-Check: Cookies & Tracking, Barrierefreiheit, Rechtstexte, Security-Header und KI-Transparenz. Ergebnis in 15 Minuten.">
+<meta name="twitter:image" content="https://compliance.aestio.de/assets/og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F5F2EC;
+    --cream-2:#EFEBE1;
+    --navy:#121B2E;
+    --navy-2:#1E2A44;
+    --slate:#5C6578;
+    --slate-light:#8A93A3;
+    --gold:#BC9A5C;
+    --gold-light:#D4B77C;
+    --line:#DCD5C6;
+    --line-dark:#2B3552;
+    --max:1180px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--cream);
+    color:var(--navy);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  ::selection{background:var(--gold-light);color:var(--navy);}
+
+  a{color:inherit;text-decoration:none;}
+
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 40px;}
+
+  img,svg{display:block;}
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(245,242,236,.78);
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    border-bottom:1px solid transparent;
+    transition:border-color .4s ease, background .4s ease;
+  }
+  header.scrolled{
+    border-bottom:1px solid var(--line);
+    background:rgba(245,242,236,.92);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 40px;max-width:var(--max);margin:0 auto;
+  }
+  .logo{
+    display:flex;align-items:baseline;gap:8px;
+    font-family:'Playfair Display',serif;
+    white-space:nowrap;
+  }
+  .logo .brand{font-size:24px;font-weight:600;color:var(--navy);letter-spacing:.2px;}
+  .logo .brand .o{color:var(--gold);}
+  .logo .para{font-size:24px;font-weight:400;color:var(--gold);}
+  .logo .sub{font-size:24px;font-weight:400;color:var(--slate);letter-spacing:.2px;}
+
+  .nav-right{display:flex;align-items:center;gap:32px;}
+
+  .social-icons{display:flex;gap:10px;align-items:center;}
+  .social-icons a{
+    width:32px;height:32px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--navy);border:1px solid var(--line-dark);
+    transition:background .25s ease, color .25s ease, border-color .25s ease, transform .25s ease;
+  }
+  .social-icons a:hover{background:var(--gold);border-color:var(--gold);color:var(--navy);transform:translateY(-1px);}
+  .social-icons svg{width:15px;height:15px;fill:currentColor;}
+
+  nav.links{display:flex;gap:40px;align-items:center;}
+  nav.links a{
+    font-size:14.5px;color:var(--navy);position:relative;padding:4px 0;
+    letter-spacing:.2px;
+  }
+  nav.links a::after{
+    content:'';position:absolute;left:0;bottom:0;width:0;height:1px;
+    background:var(--gold);transition:width .3s ease;
+  }
+  nav.links a:hover::after{width:100%;}
+
+  .cta-btn{
+    background:var(--navy);color:var(--cream);
+    padding:12px 24px;border-radius:2px;font-size:14px;font-weight:500;
+    letter-spacing:.3px;transition:background .3s ease, transform .3s ease;
+    border:1px solid var(--navy);
+  }
+  .cta-btn:hover{background:var(--navy-2);transform:translateY(-1px);}
+  .cta-btn.ghost{
+    background:transparent;color:var(--navy);border:1px solid var(--line-dark);
+  }
+  .cta-btn.ghost:hover{background:var(--navy);color:var(--cream);}
+  nav.links a.cta-btn{color:var(--cream);}
+  nav.links a.cta-btn.ghost{color:var(--navy);}
+
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
+  .burger span{width:24px;height:1.5px;background:var(--navy);display:block;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    padding:200px 0 140px;
+    overflow:hidden;
+    background:var(--cream);
+  }
+  .hero-para{
+    position:absolute;
+    right:-60px;top:-40px;
+    font-family:'Playfair Display',serif;
+    font-size:640px;
+    line-height:1;
+    color:var(--navy);
+    opacity:.035;
+    user-select:none;
+    pointer-events:none;
+  }
+  .eyebrow{
+    display:flex;align-items:center;gap:10px;
+    font-size:13px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--slate);margin-bottom:28px;font-weight:500;
+  }
+  .eyebrow .mark{color:var(--gold);font-family:'Playfair Display',serif;font-size:16px;}
+
+  .hero h1{
+    font-family:'Playfair Display',serif;
+    font-weight:500;
+    font-size:clamp(40px,6vw,76px);
+    line-height:1.08;
+    max-width:920px;
+    letter-spacing:-.5px;
+    color:var(--navy);
+  }
+  .hero h1 em{
+    font-style:italic;color:var(--gold);font-weight:400;
+  }
+  .hero p.lead{
+    margin-top:28px;
+    max-width:560px;
+    font-size:18px;
+    color:var(--slate);
+    line-height:1.7;
+    font-weight:400;
+  }
+  .hero-actions{margin-top:44px;display:flex;gap:18px;flex-wrap:wrap;}
+
+  /* ---------- Hero mockup ---------- */
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center;}
+  .live-badge{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:12.5px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .live-dot{
+    width:8px;height:8px;border-radius:50%;background:var(--gold);
+    box-shadow:0 0 0 0 rgba(188,154,92,.6);animation:livePulse 2s infinite;
+  }
+  @keyframes livePulse{
+    0%{box-shadow:0 0 0 0 rgba(188,154,92,.55);}
+    70%{box-shadow:0 0 0 9px rgba(188,154,92,0);}
+    100%{box-shadow:0 0 0 0 rgba(188,154,92,0);}
+  }
+  .mockup-card{
+    background:var(--navy);border-radius:6px;
+    box-shadow:0 40px 90px -20px rgba(18,27,46,.45), 0 0 0 1px var(--gold-light), 0 0 0 5px rgba(188,154,92,.08);
+    overflow:hidden;
+  }
+  .mockup-bar{
+    display:flex;align-items:center;gap:6px;
+    padding:14px 18px;background:var(--navy-2);
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .mockup-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);}
+  .mockup-url{
+    margin-left:10px;font-size:11.5px;color:var(--slate-light);
+    background:rgba(255,255,255,.06);padding:4px 12px;border-radius:20px;
+    flex:1;display:flex;align-items:center;gap:6px;
+  }
+  .mockup-body{padding:26px 24px 28px;}
+  .mockup-row{
+    display:flex;align-items:center;gap:12px;
+    padding:13px 0;border-bottom:1px solid rgba(255,255,255,.08);
+    font-size:14px;
+  }
+  .mockup-row:last-child{border-bottom:none;}
+  .mockup-led{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+  .mockup-led.green{background:#4C8B5A;box-shadow:0 0 8px rgba(76,139,90,.5);}
+  .mockup-led.yellow{background:var(--gold-light);box-shadow:0 0 8px rgba(212,183,124,.5);}
+  .mockup-led.red{background:#C1554A;box-shadow:0 0 8px rgba(193,85,74,.5);}
+  .mockup-row span{color:#DADFE8;}
+  .mockup-footer{
+    padding:16px 24px;background:rgba(255,255,255,.03);
+    border-top:1px solid rgba(255,255,255,.08);
+    font-size:12px;color:var(--gold-light);letter-spacing:.3px;
+  }
+
+  .hero-stats{
+    margin-top:110px;
+    display:grid;grid-template-columns:repeat(5,1fr);
+    border-top:1px solid var(--line);
+    padding-top:36px;
+    gap:24px;
+  }
+  .stat .num{font-family:'Playfair Display',serif;font-size:34px;color:var(--navy);font-weight:600;}
+  .stat .num .gold{color:var(--gold);}
+  .stat .label{font-size:13px;color:var(--slate);margin-top:6px;letter-spacing:.2px;}
+
+  /* ---------- Section shared ---------- */
+  section{padding:140px 0;position:relative;}
+  .section-head{max-width:640px;margin-bottom:80px;}
+  .section-head h2{
+    font-family:'Playfair Display',serif;font-weight:500;
+    font-size:clamp(30px,4vw,46px);line-height:1.15;color:var(--navy);
+    letter-spacing:-.3px;
+  }
+  .section-head p{margin-top:18px;color:var(--slate);font-size:16.5px;max-width:520px;}
+
+  /* ---------- Problem / Gap section ---------- */
+  .gap-section{background:var(--navy);color:var(--cream);}
+  .gap-section .section-head h2{color:var(--cream);}
+  .gap-section .section-head p{color:#B7BECC;}
+  .gap-grid{
+    display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;
+  }
+  .gap-col{padding:44px 40px;}
+  .gap-col h3{
+    font-family:'Playfair Display',serif;font-size:24px;font-weight:500;
+    margin-bottom:18px;color:var(--cream);
+  }
+  .gap-col .tag{
+    font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);
+    margin-bottom:14px;display:block;font-weight:600;
+  }
+  .gap-col ul{list-style:none;}
+  .gap-col li{
+    padding:12px 0;border-top:1px solid rgba(255,255,255,.1);
+    font-size:15px;color:#C7CCD8;display:flex;gap:10px;
+  }
+  .gap-col li:first-of-type{border-top:none;}
+  .gap-col li .x{color:#8A93A3;flex-shrink:0;}
+  .gap-divider{
+    width:1px;background:linear-gradient(to bottom, transparent, var(--gold), transparent);
+    margin:0 20px;
+  }
+  .gap-bridge{
+    grid-column:1 / -1;margin-top:40px;padding-top:40px;border-top:1px solid rgba(255,255,255,.12);
+    display:flex;align-items:center;gap:24px;
+  }
+  .gap-bridge .para-big{font-family:'Playfair Display',serif;font-size:56px;color:var(--gold);line-height:1;}
+  .gap-bridge p{font-size:17px;color:#DADFE8;max-width:640px;line-height:1.65;}
+  .gap-bridge strong{color:var(--cream);font-weight:600;}
+
+  /* ---------- Services ---------- */
+  .services-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .service{
+    background:var(--cream);padding:44px 36px;
+    transition:background .35s ease;
+  }
+  .service:hover{background:var(--cream-2);}
+  .service .num{
+    font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);
+    margin-bottom:22px;letter-spacing:.5px;
+  }
+  .service h3{
+    font-family:'Playfair Display',serif;font-size:21px;font-weight:500;
+    margin-bottom:12px;color:var(--navy);
+  }
+  .service p{font-size:14.5px;color:var(--slate);line-height:1.65;}
+  .service .flag{
+    display:inline-block;margin-top:16px;font-size:11px;letter-spacing:1px;
+    text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);
+    padding:4px 10px;border-radius:2px;
+  }
+  .service.featured{
+    grid-column:1 / -1;
+    display:flex;align-items:center;gap:40px;
+    background:var(--navy);
+  }
+  .service.featured:hover{background:var(--navy-2);}
+  .service.featured .num{color:var(--gold);margin-bottom:0;flex-shrink:0;font-size:17px;}
+  .service.featured .body{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+  .service.featured h3{color:var(--cream);margin-bottom:0;}
+  .service.featured p{color:#B7BECC;max-width:560px;}
+  .service.featured .flag{margin-top:0;color:var(--gold);border-color:var(--gold);flex-shrink:0;}
+  @media (max-width:700px){
+    .service.featured{flex-direction:column;align-items:flex-start;gap:16px;}
+    .service.featured .body{flex-direction:column;align-items:flex-start;gap:12px;}
+  }
+
+  /* ---------- Process ---------- */
+  .process-list{border-top:1px solid var(--line);}
+  .process-item{
+    display:grid;grid-template-columns:100px 1fr 1fr;gap:40px;
+    padding:42px 0;border-bottom:1px solid var(--line);
+    align-items:start;
+  }
+  .process-item .p-num{
+    font-family:'Playfair Display',serif;font-size:44px;color:var(--gold);
+    font-weight:400;line-height:1;
+  }
+  .process-item h3{
+    font-family:'Playfair Display',serif;font-size:24px;font-weight:500;color:var(--navy);
+  }
+  .process-item p{color:var(--slate);font-size:15px;max-width:440px;}
+
+  /* ---------- Trust / Network ---------- */
+  .trust{background:var(--cream-2);}
+  .trust-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:80px;align-items:center;}
+  .trust-card{
+    background:var(--cream);border:1px solid var(--line);padding:40px;
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .trust-card + .trust-card{margin-top:20px;}
+  .trust-card .label{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:600;}
+  .trust-card h4{font-family:'Playfair Display',serif;font-size:20px;color:var(--navy);font-weight:500;}
+  .trust-card p{font-size:14.5px;color:var(--slate);}
+  .disclaimer{
+    margin-top:28px;padding:22px 26px;border-left:2px solid var(--gold);
+    background:rgba(188,154,92,.06);font-size:13.5px;color:var(--slate);line-height:1.7;
+  }
+  .disclaimer strong{color:var(--navy);}
+
+  /* ---------- CTA band ---------- */
+  .cta-band{
+    background:var(--navy);color:var(--cream);text-align:center;padding:130px 0;
+    position:relative;overflow:hidden;
+  }
+  .cta-band .hero-para{opacity:.05;font-size:520px;left:50%;right:auto;top:-120px;transform:translateX(-50%);}
+  .cta-band h2{
+    font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(32px,5vw,54px);
+    max-width:760px;margin:0 auto;line-height:1.2;position:relative;z-index:2;
+  }
+  .cta-band h2 .gold{color:var(--gold);}
+  .cta-band p{color:#B7BECC;margin:22px auto 44px;max-width:480px;font-size:16px;position:relative;z-index:2;}
+  .cta-band .hero-actions{justify-content:center;position:relative;z-index:2;}
+  .cta-band .cta-btn.ghost{border-color:rgba(255,255,255,.3);color:var(--cream);}
+  .cta-band .cta-btn.ghost:hover{background:var(--cream);color:var(--navy);}
+  .cta-band .cta-btn:not(.ghost){background:var(--gold);border-color:var(--gold);color:var(--navy);}
+  .cta-band .cta-btn:not(.ghost):hover{background:var(--gold-light);border-color:var(--gold-light);}
+
+  /* ---------- Footer ---------- */
+  footer{padding:90px 0 40px;}
+  .footer-grid{
+    display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;
+    padding-bottom:60px;border-bottom:1px solid var(--line);
+  }
+  .footer-brand .logo{margin-bottom:18px;}
+  .footer-brand p{color:var(--slate);font-size:14px;max-width:280px;line-height:1.7;}
+  .footer-social{display:flex;gap:20px;margin-top:20px;}
+  .footer-social a{font-size:13px;color:var(--navy);letter-spacing:.3px;padding-bottom:2px;border-bottom:1px solid transparent;transition:color .25s ease, border-color .25s ease;}
+  .footer-social a:hover{color:var(--gold);border-color:var(--gold);}
+  .footer-col h5{
+    font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate-light);
+    margin-bottom:18px;font-weight:600;
+  }
+  .footer-col a{
+    display:block;font-size:14.5px;color:var(--navy);padding:7px 0;
+    transition:color .25s ease;
+  }
+  .footer-col a:hover{color:var(--gold);}
+  .footer-bottom{
+    display:flex;justify-content:space-between;align-items:center;
+    padding-top:30px;font-size:13px;color:var(--slate-light);flex-wrap:wrap;gap:14px;
+  }
+  .footer-bottom .mark{color:var(--gold);font-family:'Playfair Display',serif;}
+
+  /* ---------- Mobile ---------- */
+  @media (max-width: 900px){
+    .wrap{padding:0 24px;}
+    .nav{padding:18px 24px;}
+    nav.links{
+      position:fixed;top:66px;left:0;right:0;bottom:0;
+      background:var(--cream);flex-direction:column;justify-content:flex-start;
+      padding:40px 24px;gap:8px;
+      transform:translateX(100%);transition:transform .4s ease;
+    }
+    nav.links.open{transform:translateX(0);}
+    nav.links a{width:100%;padding:16px 0;border-bottom:1px solid var(--line);font-size:17px;}
+    nav.links .cta-btn{margin-top:20px;text-align:center;}
+    .nav-right{gap:16px;}
+    .burger{display:flex;}
+    .hero{padding:150px 0 90px;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-stats{grid-template-columns:repeat(2,1fr);row-gap:36px;}
+    .gap-grid{grid-template-columns:1fr;}
+    .gap-divider{display:none;}
+    .services-grid{grid-template-columns:1fr;}
+    .process-item{grid-template-columns:1fr;gap:12px;}
+    .trust-grid{grid-template-columns:1fr;gap:50px;}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:36px;}
+    .hero-para{font-size:280px;}
+    section{padding:90px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="nav">
+    <a href="#top" class="logo">
+      <span class="brand">Aesti<span class="o">o</span></span>
+      <span class="para">§</span>
+      <span class="sub">Web Compliance</span>
+    </a>
+    <div class="nav-right">
+      <div class="social-icons">
+        <a href="https://www.instagram.com/aestio.de/" target="_blank" rel="noopener" aria-label="Aestio auf Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zm0-2.16C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4zm6.41-10.85a1.44 1.44 0 1 1-1.44-1.44 1.44 1.44 0 0 1 1.44 1.44z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@aestio.de" target="_blank" rel="noopener" aria-label="Aestio auf TikTok">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+        </a>
+      </div>
+      <nav class="links" id="navLinks">
+        <a href="#leistungen">Leistungen</a>
+        <a href="#prozess">Prozess</a>
+        <a href="#netzwerk">Netzwerk</a>
+        <a href="#kontakt" class="cta-btn">Audit anfragen</a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-para">§</div>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <div class="eyebrow reveal"><span class="mark">§</span> Technisches Compliance-Audit für Websites</div>
+          <h1 class="reveal">Recht endet nicht<br>beim Text.<br><em>Es beginnt<br>im Code.</em></h1>
+          <p class="lead reveal">Aestio prüft Ihre Website dort, wo Abmahnungen tatsächlich entstehen — im Quellcode, im Netzwerk-Traffic, in der Bedienbarkeit. DSGVO, TDDDG und BFSG, sauber umgesetzt.</p>
+          <p class="lead reveal" style="margin-top:16px;font-size:14.5px;">Kostenlos, in 15 Minuten, ohne Anmeldung. <a href="#leistungen" style="color:var(--navy);text-decoration:underline;">Leistungen ansehen</a></p>
+        </div>
+        <div class="hero-mockup reveal">
+          <div class="live-badge"><span class="live-dot"></span>Live-Scanner — direkt hier ausprobieren</div>
+          <div class="mockup-card">
+            <div class="mockup-bar">
+              <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+              <div class="mockup-url" id="mockupUrl">🔒 ihre-website.de</div>
+            </div>
+
+            <div class="mockup-body" id="stateIdle">
+              <p style="font-size:14px;color:var(--cream);font-weight:500;margin-bottom:14px;">👉 Testen Sie es direkt an Ihrer eigenen Website:</p>
+              <div style="display:flex;gap:8px;">
+                <input id="urlInput" type="text" placeholder="www.ihre-website.de" onkeydown="if(event.key==='Enter')runHeroScan()" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:var(--cream);padding:11px 14px;border-radius:4px;font-size:14px;font-family:inherit;">
+              </div>
+              <button onclick="runHeroScan()" class="cta-btn" style="width:100%;margin-top:12px;justify-content:center;display:flex;">Jetzt kostenlos scannen</button>
+              <p id="scanError" style="display:none;margin-top:10px;font-size:12.5px;color:#E39B8F;"></p>
+            </div>
+
+            <div class="mockup-body" id="stateLoading" style="display:none;text-align:center;padding:34px 24px;">
+              <div style="width:26px;height:26px;border:2px solid rgba(255,255,255,.15);border-top-color:var(--gold);border-radius:50%;margin:0 auto 16px;animation:heroSpin .8s linear infinite;"></div>
+              <p style="font-size:13.5px;color:#DADFE8;">Scan läuft für <strong style="color:var(--cream);" id="loadingDomain"></strong> …</p>
+            </div>
+
+            <div class="mockup-body" id="stateResult" style="display:none;">
+              <div id="resultRows"></div>
+              <a href="#kontakt" style="display:block;margin-top:14px;font-size:12.5px;color:var(--gold-light);">Vollständigen Bericht anfragen →</a>
+            </div>
+
+            <div class="mockup-footer">§ Automatisierter Compliance-Scan</div>
+          </div>
+        </div>
+      </div>
+      <style>@keyframes heroSpin{to{transform:rotate(360deg);}}</style>
+
+      <div class="hero-stats reveal">
+        <div class="stat">
+          <div class="num">28.<span class="gold">06</span></div>
+          <div class="label">BFSG in Kraft seit Juni 2025</div>
+        </div>
+        <div class="stat">
+          <div class="num">100<span class="gold">k€</span></div>
+          <div class="label">mögliches Bußgeld bei Verstoß</div>
+        </div>
+        <div class="stat">
+          <div class="num">1<span class="gold">:1</span></div>
+          <div class="label">Code-Audit statt Textprüfung</div>
+        </div>
+        <div class="stat">
+          <div class="num">15<span class="gold">Min</span></div>
+          <div class="label">Dauer des kostenlosen Erstchecks</div>
+        </div>
+        <div class="stat">
+          <div class="num">2.<span class="gold">08</span></div>
+          <div class="label">KI-Kennzeichnungspflicht in Kraft seit August 2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GAP / PROBLEM -->
+  <section class="gap-section" id="problem">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Zwei Perspektiven.<br>Eine Lücke dazwischen.</h2>
+        <p>Webdesigner bauen. Anwälte lesen. Kaum jemand prüft, was tatsächlich im Hintergrund einer Website passiert.</p>
+      </div>
+
+      <div class="gap-grid">
+        <div class="gap-col reveal">
+          <span class="tag">IT & Webdesign</span>
+          <h3>Baut die Website</h3>
+          <ul>
+            <li><span class="x">＋</span> Funktional, schnell, ästhetisch</li>
+            <li><span class="x">＋</span> Modernes Design und UX</li>
+            <li><span class="x">－</span> Selten juristische Detailkenntnis</li>
+            <li><span class="x">－</span> Verschärfte Gesetzgebung bleibt außen vor</li>
+          </ul>
+        </div>
+        <div class="gap-divider"></div>
+        <div class="gap-col reveal">
+          <span class="tag">Rechtsanwalt</span>
+          <h3>Prüft den Text</h3>
+          <ul>
+            <li><span class="x">＋</span> Rechtliche Bewertung von Dokumenten</li>
+            <li><span class="x">＋</span> Haftung und Einzelfallberatung</li>
+            <li><span class="x">－</span> Analysiert selten den Quellcode</li>
+            <li><span class="x">－</span> Sieht nicht, was im Traffic feuert</li>
+          </ul>
+        </div>
+
+        <div class="gap-bridge reveal">
+          <div class="para-big">§</div>
+          <p><strong>Aestio schließt diese Lücke.</strong> Wir prüfen Ihre Website anhand eines festen technischen Kriterienkatalogs — direkt im Code, nicht nur auf dem Papier.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEISTUNGEN -->
+  <section id="leistungen">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Leistungen</h2>
+        <p>Sieben Bausteine, ein Ziel: Ihre digitalen Angebote technisch auf dem aktuellen Stand halten — geräuschlos im Hintergrund.</p>
+      </div>
+
+      <div class="services-grid reveal">
+        <div class="service">
+          <div class="num">§ 01</div>
+          <h3>Technisches Audit</h3>
+          <p>Code-Analyse anhand eines festen technischen Kriterienkatalogs — remote geladene Schriftarten, unsichere Einbindungen, veraltete Bibliotheken.</p>
+        </div>
+        <div class="service">
+          <div class="num">§ 02</div>
+          <h3>Cookies & Tracking</h3>
+          <p>Prüfung des Consent-Banners auf tatsächliche Blockierwirkung und Abgleich mit dem TDDDG — nicht nur auf dem Papier, im Netzwerk-Traffic.</p>
+        </div>
+        <div class="service">
+          <div class="num">§ 03</div>
+          <h3>Barrierefreiheit</h3>
+          <p>Tastatur-Navigation, Kontraste und Screenreader-Kompatibilität nach den Anforderungen des BFSG.
+          <span class="flag">BFSG</span></p>
+        </div>
+        <div class="service">
+          <div class="num">§ 04</div>
+          <h3>Rechtstexte</h3>
+          <p>Impressum und Datenschutzerklärung über eine geprüfte, laufend aktualisierte Generator-Infrastruktur eines führenden deutschen Anbieters.</p>
+        </div>
+        <div class="service">
+          <div class="num">§ 05</div>
+          <h3>Social-Media-Compliance</h3>
+          <p>Impressumspflicht und Datenschutzhinweise auch dort, wo Unternehmen sie am häufigsten vergessen.</p>
+        </div>
+        <div class="service">
+          <div class="num">§ 06</div>
+          <h3>Laufendes Monitoring</h3>
+          <p>Neue Tracker, neue Gesetze, neue Urteile — wir behalten Ihre Website im Blick, damit Sie es nicht müssen.</p>
+        </div>
+        <div class="service featured">
+          <div class="num">§ 07</div>
+          <div class="body">
+            <h3>KI-Transparenz</h3>
+            <p>Prüfung, ob Chatbots und KI-Assistenten auf Ihrer Website als solche erkennbar sind — Transparenzpflicht nach dem EU AI Act.</p>
+            <span class="flag">NEU</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROZESS -->
+  <section id="prozess" style="background:var(--cream-2);">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Der Ablauf</h2>
+        <p>Ein fester Prozess von der ersten Diagnose bis zur laufenden Absicherung.</p>
+      </div>
+
+      <div class="process-list">
+        <div class="process-item reveal">
+          <div class="p-num">01</div>
+          <h3>Erstcheck</h3>
+          <p>Kostenlose Kurzanalyse Ihrer Website — wir zeigen Ihnen die drei kritischsten technischen Befunde, unverbindlich.</p>
+        </div>
+        <div class="process-item reveal">
+          <div class="p-num">02</div>
+          <h3>Technisches Audit</h3>
+          <p>Vollständige Prüfung von Code, Traffic und Bedienbarkeit gegen einen festen, dokumentierten Kriterienkatalog.</p>
+        </div>
+        <div class="process-item reveal">
+          <div class="p-num">03</div>
+          <h3>Umsetzung</h3>
+          <p>Behebung der gefundenen Schwachstellen direkt im Code — sauber, performant, ohne Umwege über Drittsysteme.</p>
+        </div>
+        <div class="process-item reveal">
+          <div class="p-num">04</div>
+          <h3>Monitoring</h3>
+          <p>Regelmäßige Nachprüfung bei neuen Trackern, aktualisierten Gesetzen oder Änderungen an Ihrer Website.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NETZWERK / TRUST -->
+  <section class="trust" id="netzwerk">
+    <div class="wrap">
+      <div class="trust-grid">
+        <div class="reveal">
+          <div class="section-head" style="margin-bottom:36px;">
+            <h2>Geprüfte Infrastruktur.<br>Klare Grenzen.</h2>
+            <p>Wir arbeiten mit geprüfter Generator-Infrastruktur — und sagen offen, wo unsere Leistung endet.</p>
+          </div>
+          <div class="disclaimer">
+            <strong>Wichtiger Hinweis gemäß RDG:</strong> Aestio erbringt ausschließlich technische Dienstleistungen zur Umsetzung von Compliance-Vorgaben im Code. Wir erbringen keine Rechtsberatung und keine rechtliche Bewertung von Einzelfällen im Sinne des Rechtsdienstleistungsgesetzes (RDG). Für individuelle Rechtsfragen empfehlen wir die Konsultation eines unabhängigen Rechtsanwalts.
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="trust-card">
+            <span class="label">Software-Infrastruktur</span>
+            <h4>Geprüfte Generator-Basis</h4>
+            <p>Zugriff auf rechtlich geprüfte, laufend aktualisierte Generatoren und Textbausteine eines etablierten deutschen Anbieters.</p>
+          </div>
+          <div class="trust-card">
+            <span class="label">Klare Rollenverteilung</span>
+            <h4>Technik von uns, Recht vom Anwalt</h4>
+            <p>Bei individuellen Rechtsfragen oder laufenden Abmahnverfahren verweisen wir an unabhängige, spezialisierte Rechtsanwälte — ohne feste Kanzleibindung.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band" id="kontakt">
+    <div class="hero-para">§</div>
+    <div class="wrap">
+      <h2 class="reveal">Bringen wir Ihre Website<br><span class="gold">technisch auf den neuesten Stand.</span></h2>
+      <p class="reveal">Ein Erstcheck dauert 15 Minuten und zeigt Ihnen, wo Ihr größtes Risiko liegt.</p>
+      <div class="hero-actions reveal">
+        <a href="mailto:info@aestio.de" class="cta-btn">info@aestio.de</a>
+        <a href="#top" class="cta-btn ghost">Nach oben</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="logo">
+          <span class="brand">Aesti<span class="o">o</span></span>
+          <span class="para">§</span>
+          <span class="sub" style="font-size:24px;">Web Compliance</span>
+        </a>
+        <p>Technisches Compliance-Audit für Websites. Wir übersetzen Paragrafen in sauberen, performanten Quellcode.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/aestio.de/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.tiktok.com/@aestio.de" target="_blank" rel="noopener">TikTok</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Leistungen</h5>
+        <a href="#leistungen">Technisches Audit</a>
+        <a href="#leistungen">Cookies & Tracking</a>
+        <a href="#leistungen">Barrierefreiheit</a>
+        <a href="#leistungen">Rechtstexte</a>
+      </div>
+      <div class="footer-col">
+        <h5>Unternehmen</h5>
+        <a href="#problem">Über uns</a>
+        <a href="#prozess">Prozess</a>
+        <a href="#netzwerk">Netzwerk</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+      <div class="footer-col">
+        <h5>Rechtliches</h5>
+        <a href="impressum.html">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="#">AGB</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span><span class="mark">§</span> 2026 Aestio Web Compliance. Alle Rechte vorbehalten.</span>
+      <span>Technischer Dienstleister — keine Rechtsberatung im Einzelfall.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Header scroll state
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Mobile menu
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.15, rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Hero-Scanner
+  const CATEGORY_LABELS = {
+    trackers: 'Cookies & Tracking',
+    accessibility: 'Barrierefreiheit',
+    legalTexts: 'Rechtstexte',
+    security: 'TLS & Security-Header',
+    aiTransparency: 'KI-Transparenz',
+  };
+
+  async function runHeroScan(){
+    const input = document.getElementById('urlInput');
+    const url = input.value.trim();
+    const errorEl = document.getElementById('scanError');
+    errorEl.style.display = 'none';
+
+    if(!url){
+      errorEl.textContent = 'Bitte eine URL eingeben.';
+      errorEl.style.display = 'block';
+      return;
+    }
+
+    const displayDomain = url.replace(/^https?:\/\//, '');
+    document.getElementById('mockupUrl').textContent = '🔒 ' + displayDomain;
+    document.getElementById('loadingDomain').textContent = displayDomain;
+    document.getElementById('stateIdle').style.display = 'none';
+    document.getElementById('stateResult').style.display = 'none';
+    document.getElementById('stateLoading').style.display = 'block';
+
+    try {
+      const res = await fetch('/api/scan', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url }),
+      });
+      const data = await res.json();
+      if(!res.ok) throw new Error(data.error || 'Scan fehlgeschlagen.');
+
+      const rowsHtml = Object.entries(CATEGORY_LABELS).map(([key, label]) => {
+        const cat = data.categories[key];
+        return `<div class="mockup-row"><span class="mockup-led ${cat.status}"></span><span>${label}</span></div>`;
+      }).join('');
+      document.getElementById('resultRows').innerHTML = rowsHtml;
+      document.getElementById('stateLoading').style.display = 'none';
+      document.getElementById('stateResult').style.display = 'block';
+    } catch (err) {
+      document.getElementById('stateLoading').style.display = 'none';
+      document.getElementById('stateIdle').style.display = 'block';
+      errorEl.textContent = err.message || 'Scan fehlgeschlagen. Bitte URL prüfen.';
+      errorEl.style.display = 'block';
+    }
+  }
+</script>
+
+</body>
+</html>

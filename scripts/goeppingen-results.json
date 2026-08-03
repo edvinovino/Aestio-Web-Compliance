@@ -1,0 +1,2421 @@
+[
+  {
+    "name": "Restaurant Kastell",
+    "inputUrl": "https://www.kastell-restaurant.com/",
+    "url": "https://www.kastell-restaurant.com/",
+    "checkedAt": "2026-07-24T16:07:16.158Z",
+    "overallStatus": "red",
+    "categories": {
+      "trackers": {
+        "status": "red",
+        "summary": "7 externe Domain(s) laden vor jeglicher Consent-Entscheidung, kein Cookie-Banner gefunden.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [
+            "static.wixstatic.com",
+            "static.parastorage.com",
+            "frog.wix.com",
+            "panorama.wixapps.net",
+            "siteassets.parastorage.com",
+            "browser.sentry-cdn.com",
+            "maps.googleapis.com"
+          ],
+          "cookieBannerFound": false,
+          "cookieBannerRejectWorked": null,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "yellow",
+        "summary": "1 schwerwiegende(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 0,
+            "serious": 1,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass der Kontrast zwischen Vorder- und Hintergrundfarbe den in der WCAG 2 als AA ausgewiesenen Kontrastgrenzwerten entspricht.",
+              "help": "Elemente müssen einen ausreichenden Farbkontrast haben.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=playwright",
+              "nodeCount": 4
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "yellow",
+        "summary": "Impressum gefunden, aber kein Datenschutzerklärung-Link auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://www.kastell-restaurant.com/impressum",
+          "datenschutzFound": false,
+          "datenschutzUrl": null
+        }
+      },
+      "security": {
+        "status": "yellow",
+        "summary": "4 von 6 sicherheitsrelevanten HTTP-Headern fehlen.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-09-17T04:04:01.000Z",
+            "daysRemaining": 54,
+            "issuer": "Let's Encrypt"
+          },
+          "presentHeaders": [
+            "strict-transport-security",
+            "x-content-type-options"
+          ],
+          "missingHeaders": [
+            "content-security-policy",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "Crown Indisches Restaurant",
+    "inputUrl": "https://crown-indisches-restaurant.de/",
+    "url": "https://crown-indisches-restaurant.de/",
+    "checkedAt": "2026-07-24T16:07:16.679Z",
+    "overallStatus": "red",
+    "categories": {
+      "trackers": {
+        "status": "green",
+        "summary": "Keine externen Anfragen vor einer Consent-Entscheidung festgestellt.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [],
+          "cookieBannerFound": false,
+          "cookieBannerRejectWorked": null,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "red",
+        "summary": "1 kritische(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 1,
+            "serious": 2,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "button-name",
+              "impact": "critical",
+              "impactLabel": "Kritisch",
+              "description": "Stellt sicher, dass Schaltflächen wahrnehmbaren Text enthalten.",
+              "help": "Schaltflächen müssen wahrnehmbaren Text enthalten.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/button-name?application=playwright",
+              "nodeCount": 1
+            },
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass der Kontrast zwischen Vorder- und Hintergrundfarbe den in der WCAG 2 als AA ausgewiesenen Kontrastgrenzwerten entspricht.",
+              "help": "Elemente müssen einen ausreichenden Farbkontrast haben.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=playwright",
+              "nodeCount": 1
+            },
+            {
+              "id": "link-name",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass Links wahrnehmbaren Text beinhalten.",
+              "help": "Links müssen wahrnehmbaren Text beinhalten.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-name?application=playwright",
+              "nodeCount": 1
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://crown-indisches-restaurant.de/impressum/",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://crown-indisches-restaurant.de/privacy-policy/"
+        }
+      },
+      "security": {
+        "status": "yellow",
+        "summary": "6 von 6 sicherheitsrelevanten HTTP-Headern fehlen.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-10-01T22:10:08.000Z",
+            "daysRemaining": 69,
+            "issuer": "Let's Encrypt"
+          },
+          "presentHeaders": [],
+          "missingHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "Ristorante Corona",
+    "inputUrl": "https://ristorante-corona.de/",
+    "url": "https://ristorante-corona.de/",
+    "checkedAt": "2026-07-24T16:07:14.652Z",
+    "overallStatus": "red",
+    "categories": {
+      "trackers": {
+        "status": "green",
+        "summary": "Keine externen Anfragen vor einer Consent-Entscheidung festgestellt.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [],
+          "cookieBannerFound": false,
+          "cookieBannerRejectWorked": null,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "red",
+        "summary": "1 kritische(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 1,
+            "serious": 3,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "document-title",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass jedes HTML-Dokument ein nichtleeres <title>-Element besitzt.",
+              "help": "Dokumente müssen ein <title>-Element besitzen, um die Navigation zu erleichtern.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/document-title?application=playwright",
+              "nodeCount": 1
+            },
+            {
+              "id": "image-alt",
+              "impact": "critical",
+              "impactLabel": "Kritisch",
+              "description": "Stellt sicher, dass <img>-Elemente einen Alternativtext oder eine ARIA-Rolle mit dem Wert none oder presentation besitzen.",
+              "help": "Abbildungen müssen einen Alternativtext besitzen.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/image-alt?application=playwright",
+              "nodeCount": 5
+            },
+            {
+              "id": "link-name",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass Links wahrnehmbaren Text beinhalten.",
+              "help": "Links müssen wahrnehmbaren Text beinhalten.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-name?application=playwright",
+              "nodeCount": 4
+            },
+            {
+              "id": "list",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass Listen korrekt strukturiert sind.",
+              "help": "<ul>- und <ol>-Elemente dürfen unmittelbar nur <li>-, <script>- oder <template>-Elemente enthalten.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/list?application=playwright",
+              "nodeCount": 3
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://ristorante-corona.de/impressum",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://ristorante-corona.de/datenschutz"
+        }
+      },
+      "security": {
+        "status": "yellow",
+        "summary": "4 von 6 sicherheitsrelevanten HTTP-Headern fehlen.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-10-05T16:46:40.000Z",
+            "daysRemaining": 73,
+            "issuer": "Let's Encrypt"
+          },
+          "presentHeaders": [
+            "strict-transport-security",
+            "x-content-type-options"
+          ],
+          "missingHeaders": [
+            "content-security-policy",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "Cafe Berner",
+    "inputUrl": "https://www.cafe-berner.de/",
+    "url": "https://www.cafe-berner.de/",
+    "checkedAt": "2026-07-24T16:07:27.786Z",
+    "overallStatus": "red",
+    "categories": {
+      "trackers": {
+        "status": "green",
+        "summary": "Keine externen Anfragen vor einer Consent-Entscheidung festgestellt.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [],
+          "cookieBannerFound": false,
+          "cookieBannerRejectWorked": null,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "red",
+        "summary": "1 kritische(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 1,
+            "serious": 3,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass der Kontrast zwischen Vorder- und Hintergrundfarbe den in der WCAG 2 als AA ausgewiesenen Kontrastgrenzwerten entspricht.",
+              "help": "Elemente müssen einen ausreichenden Farbkontrast haben.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=playwright",
+              "nodeCount": 4
+            },
+            {
+              "id": "image-alt",
+              "impact": "critical",
+              "impactLabel": "Kritisch",
+              "description": "Stellt sicher, dass <img>-Elemente einen Alternativtext oder eine ARIA-Rolle mit dem Wert none oder presentation besitzen.",
+              "help": "Abbildungen müssen einen Alternativtext besitzen.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/image-alt?application=playwright",
+              "nodeCount": 2
+            },
+            {
+              "id": "link-in-text-block",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass Links vom umgebenden Text nicht allein durch die Farbe unterschieden werden können.",
+              "help": "Links müssen vom umgebenden Text auf eine Weise unterschieden werden können, die nicht allein auf Farbe beruht.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-in-text-block?application=playwright",
+              "nodeCount": 1
+            },
+            {
+              "id": "link-name",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass Links wahrnehmbaren Text beinhalten.",
+              "help": "Links müssen wahrnehmbaren Text beinhalten.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-name?application=playwright",
+              "nodeCount": 4
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://www.cafe-berner.de/impressum/",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://www.cafe-berner.de/datenschutzerklaerung/"
+        }
+      },
+      "security": {
+        "status": "yellow",
+        "summary": "6 von 6 sicherheitsrelevanten HTTP-Headern fehlen.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-12-05T11:06:25.000Z",
+            "daysRemaining": 134,
+            "issuer": "Starfield Technologies, Inc."
+          },
+          "presentHeaders": [],
+          "missingHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "Bäckerei Kauderer",
+    "inputUrl": "https://www.baeckerei-kauderer.de/",
+    "url": "https://www.baeckerei-kauderer.de/",
+    "checkedAt": "2026-07-24T16:07:23.783Z",
+    "overallStatus": "red",
+    "categories": {
+      "trackers": {
+        "status": "green",
+        "summary": "Keine externen Anfragen vor einer Consent-Entscheidung festgestellt.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [],
+          "cookieBannerFound": false,
+          "cookieBannerRejectWorked": null,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "red",
+        "summary": "1 kritische(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 1,
+            "serious": 2,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass der Kontrast zwischen Vorder- und Hintergrundfarbe den in der WCAG 2 als AA ausgewiesenen Kontrastgrenzwerten entspricht.",
+              "help": "Elemente müssen einen ausreichenden Farbkontrast haben.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=playwright",
+              "nodeCount": 19
+            },
+            {
+              "id": "image-alt",
+              "impact": "critical",
+              "impactLabel": "Kritisch",
+              "description": "Stellt sicher, dass <img>-Elemente einen Alternativtext oder eine ARIA-Rolle mit dem Wert none oder presentation besitzen.",
+              "help": "Abbildungen müssen einen Alternativtext besitzen.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/image-alt?application=playwright",
+              "nodeCount": 5
+            },
+            {
+              "id": "link-name",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass Links wahrnehmbaren Text beinhalten.",
+              "help": "Links müssen wahrnehmbaren Text beinhalten.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-name?application=playwright",
+              "nodeCount": 3
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://www.baeckerei-kauderer.de/impressum.php",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://www.baeckerei-kauderer.de/datenschutz.php"
+        }
+      },
+      "security": {
+        "status": "yellow",
+        "summary": "6 von 6 sicherheitsrelevanten HTTP-Headern fehlen.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-10-21T14:05:08.000Z",
+            "daysRemaining": 89,
+            "issuer": "Let's Encrypt"
+          },
+          "presentHeaders": [],
+          "missingHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "MayerS Bäckerei & Konditorei",
+    "inputUrl": "https://www.mayer-s.de/",
+    "url": "https://www.mayer-s.de/",
+    "checkedAt": "2026-07-24T16:07:30.276Z",
+    "overallStatus": "yellow",
+    "categories": {
+      "trackers": {
+        "status": "yellow",
+        "summary": "4 externe Domain(s) laden vor der Consent-Entscheidung. Banner vorhanden und Ablehnen-Funktion blockiert weitere externe Anfragen korrekt.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [
+            "cdn.prod.website-files.com",
+            "d3e54v103j8qbb.cloudfront.net",
+            "www.youtube-nocookie.com",
+            "uc.e-recht24.de"
+          ],
+          "cookieBannerFound": true,
+          "cookieBannerRejectWorked": true,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "yellow",
+        "summary": "1 schwerwiegende(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 0,
+            "serious": 1,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "link-name",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass Links wahrnehmbaren Text beinhalten.",
+              "help": "Links müssen wahrnehmbaren Text beinhalten.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-name?application=playwright",
+              "nodeCount": 1
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://www.mayer-s.de/impressum",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://www.mayer-s.de/datenschutz"
+        }
+      },
+      "security": {
+        "status": "green",
+        "summary": "HTTPS wird erzwungen, Zertifikat gültig, sicherheitsrelevante Header größtenteils gesetzt.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-09-13T07:07:32.000Z",
+            "daysRemaining": 51,
+            "issuer": "Google Trust Services"
+          },
+          "presentHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-frame-options"
+          ],
+          "missingHeaders": [
+            "x-content-type-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "Friseur Dreher",
+    "inputUrl": "https://www.friseur-dreher.de/",
+    "url": "https://www.friseur-dreher.de/",
+    "checkedAt": "2026-07-24T16:07:30.117Z",
+    "overallStatus": "yellow",
+    "categories": {
+      "trackers": {
+        "status": "green",
+        "summary": "Keine externen Anfragen vor einer Consent-Entscheidung festgestellt.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [],
+          "cookieBannerFound": false,
+          "cookieBannerRejectWorked": null,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "yellow",
+        "summary": "1 schwerwiegende(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 0,
+            "serious": 1,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass der Kontrast zwischen Vorder- und Hintergrundfarbe den in der WCAG 2 als AA ausgewiesenen Kontrastgrenzwerten entspricht.",
+              "help": "Elemente müssen einen ausreichenden Farbkontrast haben.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=playwright",
+              "nodeCount": 17
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://www.friseur-dreher.de/impressum",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://www.friseur-dreher.de/datenschutzerklaerung"
+        }
+      },
+      "security": {
+        "status": "yellow",
+        "summary": "6 von 6 sicherheitsrelevanten HTTP-Headern fehlen.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-09-03T23:30:46.000Z",
+            "daysRemaining": 41,
+            "issuer": "Let's Encrypt"
+          },
+          "presentHeaders": [],
+          "missingHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "Daniel Steinmacher (Friseur)",
+    "inputUrl": "https://www.daniel-steinmacher.de/",
+    "url": "https://www.daniel-steinmacher.de/",
+    "checkedAt": "2026-07-24T16:07:36.602Z",
+    "overallStatus": "red",
+    "categories": {
+      "trackers": {
+        "status": "yellow",
+        "summary": "3 externe Domain(s) laden vor der Consent-Entscheidung. Banner vorhanden und Ablehnen-Funktion blockiert weitere externe Anfragen korrekt.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [
+            "app.instyler.de",
+            "app2043.instyler.de",
+            "ssl.google-analytics.com"
+          ],
+          "cookieBannerFound": true,
+          "cookieBannerRejectWorked": true,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "red",
+        "summary": "1 kritische(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 1,
+            "serious": 1,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass der Kontrast zwischen Vorder- und Hintergrundfarbe den in der WCAG 2 als AA ausgewiesenen Kontrastgrenzwerten entspricht.",
+              "help": "Elemente müssen einen ausreichenden Farbkontrast haben.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=playwright",
+              "nodeCount": 10
+            },
+            {
+              "id": "label",
+              "impact": "critical",
+              "impactLabel": "Kritisch",
+              "description": "Stellt sicher, dass jedes <form>-Element über eine Beschriftung verfügt.",
+              "help": "<form>-Elemente müssen eine Beschriftung haben.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/label?application=playwright",
+              "nodeCount": 1
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://www.daniel-steinmacher.de/impressum.html",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://www.facebook.com/policies/cookies"
+        }
+      },
+      "security": {
+        "status": "red",
+        "summary": "HTTP wird nicht automatisch auf HTTPS umgeleitet.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": false,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-09-01T23:59:59.000Z",
+            "daysRemaining": 39,
+            "issuer": "Sectigo Limited"
+          },
+          "presentHeaders": [],
+          "missingHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "Friseurkunst",
+    "inputUrl": "https://www.friseurkunst.com/",
+    "url": "https://www.friseurkunst.com/",
+    "checkedAt": "2026-07-24T16:07:34.827Z",
+    "overallStatus": "yellow",
+    "categories": {
+      "trackers": {
+        "status": "green",
+        "summary": "Keine externen Anfragen vor einer Consent-Entscheidung festgestellt.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [],
+          "cookieBannerFound": false,
+          "cookieBannerRejectWorked": null,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "yellow",
+        "summary": "1 schwerwiegende(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 0,
+            "serious": 1,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass der Kontrast zwischen Vorder- und Hintergrundfarbe den in der WCAG 2 als AA ausgewiesenen Kontrastgrenzwerten entspricht.",
+              "help": "Elemente müssen einen ausreichenden Farbkontrast haben.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=playwright",
+              "nodeCount": 3
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://www.friseurkunst.com/impressum",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://www.friseurkunst.com/datenschutzerklaerung"
+        }
+      },
+      "security": {
+        "status": "yellow",
+        "summary": "6 von 6 sicherheitsrelevanten HTTP-Headern fehlen.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2027-01-18T23:59:59.000Z",
+            "daysRemaining": 178,
+            "issuer": "Sectigo Limited"
+          },
+          "presentHeaders": [],
+          "missingHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "KFZ Werkstatt Terihaj",
+    "inputUrl": "https://kfz-terihaj.de/",
+    "url": "https://kfz-terihaj.de/",
+    "checkedAt": "2026-07-24T16:07:35.333Z",
+    "overallStatus": "red",
+    "categories": {
+      "trackers": {
+        "status": "red",
+        "summary": "1 externe Domain(s) laden vor jeglicher Consent-Entscheidung, kein Cookie-Banner gefunden.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [
+            "fonts.gstatic.com"
+          ],
+          "cookieBannerFound": false,
+          "cookieBannerRejectWorked": null,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "yellow",
+        "summary": "2 schwerwiegende(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 0,
+            "serious": 2,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "nested-interactive",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass interaktive Steuerelemente nicht verschachtelt (nested) sind, da sie nicht immer von Bildschirmlesegeräten angezeigt werden oder Probleme bei der Fokussierung von Hilfstechnologien verursachen können.",
+              "help": "Interaktive Steuerelemente dürfen nicht verschachtelt (nested) werden.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/nested-interactive?application=playwright",
+              "nodeCount": 6
+            },
+            {
+              "id": "scrollable-region-focusable",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Elemente, welche scrollbaren Inhalt besitzen sollten durch die Tastatur erreichbar und bedienbar sein.",
+              "help": "Scrollbare Regionen müssen per Tastatur erreichbar sein.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/scrollable-region-focusable?application=playwright",
+              "nodeCount": 1
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "red",
+        "summary": "Kein Impressum-Link auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": false,
+          "impressumUrl": null,
+          "datenschutzFound": false,
+          "datenschutzUrl": null
+        }
+      },
+      "security": {
+        "status": "green",
+        "summary": "HTTPS wird erzwungen, Zertifikat gültig, sicherheitsrelevante Header größtenteils gesetzt.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-10-17T20:33:30.000Z",
+            "daysRemaining": 85,
+            "issuer": "Let's Encrypt"
+          },
+          "presentHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "referrer-policy",
+            "permissions-policy"
+          ],
+          "missingHeaders": [
+            "x-frame-options"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "AUTO CHECK Mayer & Köhler",
+    "inputUrl": "https://www.ac-goeppingen.de/",
+    "url": "https://www.ac-goeppingen.de/",
+    "checkedAt": "2026-07-24T16:07:51.260Z",
+    "overallStatus": "yellow",
+    "categories": {
+      "trackers": {
+        "status": "yellow",
+        "summary": "1 externe Domain(s) laden vor der Consent-Entscheidung. Banner vorhanden und Ablehnen-Funktion blockiert weitere externe Anfragen korrekt.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [
+            "piwik.newsnavigators.de"
+          ],
+          "cookieBannerFound": true,
+          "cookieBannerRejectWorked": true,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "green",
+        "summary": "Keine automatisiert erkennbaren Barrierefreiheits-Probleme gefunden.",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 0,
+            "serious": 0,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": []
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://www.ac-goeppingen.de/meta-navigation/impressum",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://www.ac-goeppingen.de/meta-navigation/datenschutz"
+        }
+      },
+      "security": {
+        "status": "green",
+        "summary": "HTTPS wird erzwungen, Zertifikat gültig, sicherheitsrelevante Header größtenteils gesetzt.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-09-02T23:15:40.000Z",
+            "daysRemaining": 40,
+            "issuer": "Let's Encrypt"
+          },
+          "presentHeaders": [
+            "strict-transport-security",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ],
+          "missingHeaders": [
+            "content-security-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "PhysioFit Hock",
+    "inputUrl": "https://www.physiofithock-gp.de/",
+    "url": "https://www.physiofithock-gp.de/",
+    "checkedAt": "2026-07-24T16:07:47.007Z",
+    "overallStatus": "yellow",
+    "categories": {
+      "trackers": {
+        "status": "green",
+        "summary": "Cookie-Banner gefunden, keine externen Anfragen vor Consent-Entscheidung, Ablehnen-Funktion greift.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [],
+          "cookieBannerFound": true,
+          "cookieBannerRejectWorked": true,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "yellow",
+        "summary": "2 schwerwiegende(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 0,
+            "serious": 2,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "link-name",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass Links wahrnehmbaren Text beinhalten.",
+              "help": "Links müssen wahrnehmbaren Text beinhalten.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-name?application=playwright",
+              "nodeCount": 5
+            },
+            {
+              "id": "scrollable-region-focusable",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Elemente, welche scrollbaren Inhalt besitzen sollten durch die Tastatur erreichbar und bedienbar sein.",
+              "help": "Scrollbare Regionen müssen per Tastatur erreichbar sein.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/scrollable-region-focusable?application=playwright",
+              "nodeCount": 1
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://www.physiofithock-gp.de/impressum-01.html",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://policies.google.com/privacy?hl=de"
+        }
+      },
+      "security": {
+        "status": "yellow",
+        "summary": "6 von 6 sicherheitsrelevanten HTTP-Headern fehlen.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-09-19T19:36:43.000Z",
+            "daysRemaining": 57,
+            "issuer": "Let's Encrypt"
+          },
+          "presentHeaders": [],
+          "missingHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "PhysioMitte Göppingen",
+    "inputUrl": "https://www.physiomitte-gp.de/",
+    "url": "https://www.physiomitte-gp.de/",
+    "checkedAt": "2026-07-24T16:07:51.045Z",
+    "overallStatus": "red",
+    "categories": {
+      "trackers": {
+        "status": "red",
+        "summary": "4 externe Domain(s) laden vor jeglicher Consent-Entscheidung, kein Cookie-Banner gefunden.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [
+            "www.google.com",
+            "maps.gstatic.com",
+            "maps.googleapis.com",
+            "fonts.googleapis.com"
+          ],
+          "cookieBannerFound": false,
+          "cookieBannerRejectWorked": null,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "red",
+        "summary": "2 kritische(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 2,
+            "serious": 5,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "aria-input-field-name",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass jeder ARIA-input einen zugänglichen Namen (accessible name) besitzt.",
+              "help": "ARIA-inputs müssen einen zugänglichen Namen (accessible name) besitzen.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/aria-input-field-name?application=playwright",
+              "nodeCount": 1
+            },
+            {
+              "id": "aria-required-children",
+              "impact": "critical",
+              "impactLabel": "Kritisch",
+              "description": "Stellt sicher, dass Elemente mit einer ARIA-Rolle, welche bestimmte untergeordnete Rollen voraussetzten diese auch enthalten.",
+              "help": "Bestimmte ARIA-Rollen müssen spezifische, untergeordnete Kind-Rollen enthalten.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/aria-required-children?application=playwright",
+              "nodeCount": 1
+            },
+            {
+              "id": "button-name",
+              "impact": "critical",
+              "impactLabel": "Kritisch",
+              "description": "Stellt sicher, dass Schaltflächen wahrnehmbaren Text enthalten.",
+              "help": "Schaltflächen müssen wahrnehmbaren Text enthalten.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/button-name?application=playwright",
+              "nodeCount": 26
+            },
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass der Kontrast zwischen Vorder- und Hintergrundfarbe den in der WCAG 2 als AA ausgewiesenen Kontrastgrenzwerten entspricht.",
+              "help": "Elemente müssen einen ausreichenden Farbkontrast haben.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=playwright",
+              "nodeCount": 9
+            },
+            {
+              "id": "frame-title",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass <iframe> und <frame>-Elemente ein nichtleeres title-Attribut besitzen.",
+              "help": "Frames müssen ein nichtleeres title-Attribut besitzen.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/frame-title?application=playwright",
+              "nodeCount": 1
+            },
+            {
+              "id": "link-in-text-block",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass Links vom umgebenden Text nicht allein durch die Farbe unterschieden werden können.",
+              "help": "Links müssen vom umgebenden Text auf eine Weise unterschieden werden können, die nicht allein auf Farbe beruht.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-in-text-block?application=playwright",
+              "nodeCount": 4
+            },
+            {
+              "id": "link-name",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass Links wahrnehmbaren Text beinhalten.",
+              "help": "Links müssen wahrnehmbaren Text beinhalten.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-name?application=playwright",
+              "nodeCount": 54
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://www.physiomitte-gp.de/impressum.html",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://www.physiomitte-gp.de/datenschutz.html"
+        }
+      },
+      "security": {
+        "status": "yellow",
+        "summary": "6 von 6 sicherheitsrelevanten HTTP-Headern fehlen.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-08-17T23:59:59.000Z",
+            "daysRemaining": 24,
+            "issuer": "Sectigo Limited"
+          },
+          "presentHeaders": [],
+          "missingHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "Therapie am Stadtpark (Thomas Hummel)",
+    "inputUrl": "https://www.therapie-hummel.de/",
+    "url": "https://www.therapie-hummel.de/",
+    "checkedAt": "2026-07-24T16:07:54.215Z",
+    "overallStatus": "yellow",
+    "categories": {
+      "trackers": {
+        "status": "green",
+        "summary": "Keine externen Anfragen vor einer Consent-Entscheidung festgestellt.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [],
+          "cookieBannerFound": false,
+          "cookieBannerRejectWorked": null,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "yellow",
+        "summary": "3 schwerwiegende(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 0,
+            "serious": 3,
+            "moderate": 1,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "aria-hidden-focus",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass ARIA-hidden Elemente keine fokussierbaren Elemente beinhalten.",
+              "help": "ARIA-hidden Elemente dürfen keine fokussierbaren Elemente beinhalten.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/aria-hidden-focus?application=playwright",
+              "nodeCount": 20
+            },
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass der Kontrast zwischen Vorder- und Hintergrundfarbe den in der WCAG 2 als AA ausgewiesenen Kontrastgrenzwerten entspricht.",
+              "help": "Elemente müssen einen ausreichenden Farbkontrast haben.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=playwright",
+              "nodeCount": 1
+            },
+            {
+              "id": "link-name",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass Links wahrnehmbaren Text beinhalten.",
+              "help": "Links müssen wahrnehmbaren Text beinhalten.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-name?application=playwright",
+              "nodeCount": 8
+            },
+            {
+              "id": "meta-viewport",
+              "impact": "moderate",
+              "impactLabel": "Moderat",
+              "description": "Stellt sicher, dass <meta name=\"viewport\"> Textskalierung und -zoom nicht verhindert werden.",
+              "help": "Zoomen und Skalieren darf nicht deaktiviert werden.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/meta-viewport?application=playwright",
+              "nodeCount": 1
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://www.therapie-hummel.de/impressum/",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://www.therapie-hummel.de/datenschutzerklaerung-2/"
+        }
+      },
+      "security": {
+        "status": "yellow",
+        "summary": "6 von 6 sicherheitsrelevanten HTTP-Headern fehlen.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2027-01-29T23:59:59.000Z",
+            "daysRemaining": 189,
+            "issuer": "Sectigo Limited"
+          },
+          "presentHeaders": [],
+          "missingHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "Thiess Gesundheitszentrum",
+    "inputUrl": "https://thiess-physiotherapie.de/",
+    "url": "https://thiess-physiotherapie.de/",
+    "checkedAt": "2026-07-24T16:07:56.050Z",
+    "overallStatus": "red",
+    "categories": {
+      "trackers": {
+        "status": "red",
+        "summary": "3 externe Domain(s) laden vor jeglicher Consent-Entscheidung, kein Cookie-Banner gefunden.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [
+            "cdn-cookieyes.com",
+            "fonts.googleapis.com",
+            "fonts.gstatic.com"
+          ],
+          "cookieBannerFound": false,
+          "cookieBannerRejectWorked": null,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "yellow",
+        "summary": "1 schwerwiegende(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 0,
+            "serious": 1,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass der Kontrast zwischen Vorder- und Hintergrundfarbe den in der WCAG 2 als AA ausgewiesenen Kontrastgrenzwerten entspricht.",
+              "help": "Elemente müssen einen ausreichenden Farbkontrast haben.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=playwright",
+              "nodeCount": 8
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://thiess-physiotherapie.de/impressum/",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://thiess-physiotherapie.de/datenschutz/"
+        }
+      },
+      "security": {
+        "status": "red",
+        "summary": "HTTP wird nicht automatisch auf HTTPS umgeleitet.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": false,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-09-02T05:39:51.000Z",
+            "daysRemaining": 40,
+            "issuer": "Let's Encrypt"
+          },
+          "presentHeaders": [],
+          "missingHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "Medicus Physiotherapie",
+    "inputUrl": "https://medicus-physiotherapie.de/",
+    "url": "https://medicus-physiotherapie.de/",
+    "checkedAt": "2026-07-24T16:07:58.043Z",
+    "overallStatus": "red",
+    "categories": {
+      "trackers": {
+        "status": "green",
+        "summary": "Keine externen Anfragen vor einer Consent-Entscheidung festgestellt.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [],
+          "cookieBannerFound": false,
+          "cookieBannerRejectWorked": null,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "red",
+        "summary": "2 kritische(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 2,
+            "serious": 4,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "aria-input-field-name",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass jeder ARIA-input einen zugänglichen Namen (accessible name) besitzt.",
+              "help": "ARIA-inputs müssen einen zugänglichen Namen (accessible name) besitzen.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/aria-input-field-name?application=playwright",
+              "nodeCount": 1
+            },
+            {
+              "id": "aria-required-children",
+              "impact": "critical",
+              "impactLabel": "Kritisch",
+              "description": "Stellt sicher, dass Elemente mit einer ARIA-Rolle, welche bestimmte untergeordnete Rollen voraussetzten diese auch enthalten.",
+              "help": "Bestimmte ARIA-Rollen müssen spezifische, untergeordnete Kind-Rollen enthalten.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/aria-required-children?application=playwright",
+              "nodeCount": 1
+            },
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass der Kontrast zwischen Vorder- und Hintergrundfarbe den in der WCAG 2 als AA ausgewiesenen Kontrastgrenzwerten entspricht.",
+              "help": "Elemente müssen einen ausreichenden Farbkontrast haben.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=playwright",
+              "nodeCount": 49
+            },
+            {
+              "id": "link-in-text-block",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass Links vom umgebenden Text nicht allein durch die Farbe unterschieden werden können.",
+              "help": "Links müssen vom umgebenden Text auf eine Weise unterschieden werden können, die nicht allein auf Farbe beruht.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-in-text-block?application=playwright",
+              "nodeCount": 1
+            },
+            {
+              "id": "link-name",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass Links wahrnehmbaren Text beinhalten.",
+              "help": "Links müssen wahrnehmbaren Text beinhalten.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-name?application=playwright",
+              "nodeCount": 3
+            },
+            {
+              "id": "select-name",
+              "impact": "critical",
+              "impactLabel": "Kritisch",
+              "description": "Stellt sicher, dass <select> Elemente einen zugänglichen Namen (accessible name) besitzen.",
+              "help": "<select> Elemente müssen einen zugänglichen Namen (accessible name) besitzen.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/select-name?application=playwright",
+              "nodeCount": 1
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://medicus-physiotherapie.de/impressum/",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://medicus-physiotherapie.de/datenschutz/"
+        }
+      },
+      "security": {
+        "status": "yellow",
+        "summary": "6 von 6 sicherheitsrelevanten HTTP-Headern fehlen.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-11-22T23:59:59.000Z",
+            "daysRemaining": 121,
+            "issuer": "DigiCert Inc"
+          },
+          "presentHeaders": [],
+          "missingHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "sano Physiotherapie",
+    "inputUrl": "https://www.sano-gp.de/",
+    "url": "https://www.sano-gp.de/",
+    "checkedAt": "2026-07-24T16:08:06.884Z",
+    "overallStatus": "red",
+    "categories": {
+      "trackers": {
+        "status": "red",
+        "summary": "2 externe Domain(s) laden vor jeglicher Consent-Entscheidung, kein Cookie-Banner gefunden.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [
+            "looks.feelfree-chiro.de",
+            "api.userway.org"
+          ],
+          "cookieBannerFound": false,
+          "cookieBannerRejectWorked": null,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "red",
+        "summary": "1 kritische(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 1,
+            "serious": 3,
+            "moderate": 1,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass der Kontrast zwischen Vorder- und Hintergrundfarbe den in der WCAG 2 als AA ausgewiesenen Kontrastgrenzwerten entspricht.",
+              "help": "Elemente müssen einen ausreichenden Farbkontrast haben.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=playwright",
+              "nodeCount": 7
+            },
+            {
+              "id": "label",
+              "impact": "critical",
+              "impactLabel": "Kritisch",
+              "description": "Stellt sicher, dass jedes <form>-Element über eine Beschriftung verfügt.",
+              "help": "<form>-Elemente müssen eine Beschriftung haben.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/label?application=playwright",
+              "nodeCount": 1
+            },
+            {
+              "id": "link-name",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass Links wahrnehmbaren Text beinhalten.",
+              "help": "Links müssen wahrnehmbaren Text beinhalten.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-name?application=playwright",
+              "nodeCount": 3
+            },
+            {
+              "id": "meta-viewport",
+              "impact": "moderate",
+              "impactLabel": "Moderat",
+              "description": "Stellt sicher, dass <meta name=\"viewport\"> Textskalierung und -zoom nicht verhindert werden.",
+              "help": "Zoomen und Skalieren darf nicht deaktiviert werden.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/meta-viewport?application=playwright",
+              "nodeCount": 1
+            },
+            {
+              "id": "scrollable-region-focusable",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Elemente, welche scrollbaren Inhalt besitzen sollten durch die Tastatur erreichbar und bedienbar sein.",
+              "help": "Scrollbare Regionen müssen per Tastatur erreichbar sein.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/scrollable-region-focusable?application=playwright",
+              "nodeCount": 3
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://www.sano-gp.de/impressum/",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://www.sano-gp.de/datenschutzerklaerung/"
+        }
+      },
+      "security": {
+        "status": "yellow",
+        "summary": "6 von 6 sicherheitsrelevanten HTTP-Headern fehlen.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2027-01-11T23:59:59.000Z",
+            "daysRemaining": 171,
+            "issuer": "DigiCert Inc"
+          },
+          "presentHeaders": [],
+          "missingHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "B-Physio",
+    "inputUrl": "https://b-physio.de/goeppingen/",
+    "url": "https://b-physio.de/goeppingen/",
+    "checkedAt": "2026-07-24T16:08:07.421Z",
+    "overallStatus": "red",
+    "categories": {
+      "trackers": {
+        "status": "red",
+        "summary": "2 externe Domain(s) laden vor jeglicher Consent-Entscheidung, kein Cookie-Banner gefunden.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [
+            "cdnjs.cloudflare.com",
+            "staging.physio-blankenhagen.de"
+          ],
+          "cookieBannerFound": false,
+          "cookieBannerRejectWorked": null,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "yellow",
+        "summary": "1 schwerwiegende(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 0,
+            "serious": 1,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass der Kontrast zwischen Vorder- und Hintergrundfarbe den in der WCAG 2 als AA ausgewiesenen Kontrastgrenzwerten entspricht.",
+              "help": "Elemente müssen einen ausreichenden Farbkontrast haben.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=playwright",
+              "nodeCount": 10
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://b-physio.de/impressum/",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://b-physio.de/datenschutz/"
+        }
+      },
+      "security": {
+        "status": "yellow",
+        "summary": "6 von 6 sicherheitsrelevanten HTTP-Headern fehlen.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-09-24T10:35:18.000Z",
+            "daysRemaining": 62,
+            "issuer": "Let's Encrypt"
+          },
+          "presentHeaders": [],
+          "missingHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "Physioconcept Göppingen",
+    "inputUrl": "https://www.ziegler-physiotherapie.de/physioconcept-goeppingen/",
+    "url": "https://www.ziegler-physiotherapie.de/physioconcept-goeppingen/",
+    "checkedAt": "2026-07-24T16:08:07.753Z",
+    "overallStatus": "red",
+    "categories": {
+      "trackers": {
+        "status": "red",
+        "summary": "16 externe Domain(s) laden vor jeglicher Consent-Entscheidung, kein Cookie-Banner gefunden.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [
+            "securepubads.g.doubleclick.net",
+            "pagead2.googlesyndication.com",
+            "cdnjs.cloudflare.com",
+            "www.googletagmanager.com",
+            "maps.google.com",
+            "lh3.googleusercontent.com",
+            "streetviewpixels-pa.googleapis.com",
+            "region1.google-analytics.com",
+            "www.google.com",
+            "maps.gstatic.com",
+            "maps.googleapis.com",
+            "fundingchoicesmessages.google.com",
+            "fonts.googleapis.com",
+            "fonts.gstatic.com",
+            "ep1.adtrafficquality.google",
+            "ep2.adtrafficquality.google"
+          ],
+          "cookieBannerFound": false,
+          "cookieBannerRejectWorked": null,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "red",
+        "summary": "1 kritische(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 1,
+            "serious": 2,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "frame-title",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass <iframe> und <frame>-Elemente ein nichtleeres title-Attribut besitzen.",
+              "help": "Frames müssen ein nichtleeres title-Attribut besitzen.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/frame-title?application=playwright",
+              "nodeCount": 1
+            },
+            {
+              "id": "image-alt",
+              "impact": "critical",
+              "impactLabel": "Kritisch",
+              "description": "Stellt sicher, dass <img>-Elemente einen Alternativtext oder eine ARIA-Rolle mit dem Wert none oder presentation besitzen.",
+              "help": "Abbildungen müssen einen Alternativtext besitzen.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/image-alt?application=playwright",
+              "nodeCount": 1
+            },
+            {
+              "id": "list",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass Listen korrekt strukturiert sind.",
+              "help": "<ul>- und <ol>-Elemente dürfen unmittelbar nur <li>-, <script>- oder <template>-Elemente enthalten.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/list?application=playwright",
+              "nodeCount": 2
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://www.ziegler-physiotherapie.de/impressum/",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://www.ziegler-physiotherapie.de/datenschutzerklaerung/"
+        }
+      },
+      "security": {
+        "status": "red",
+        "summary": "HTTP wird nicht automatisch auf HTTPS umgeleitet.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": false,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-10-05T00:19:30.000Z",
+            "daysRemaining": 72,
+            "issuer": "Let's Encrypt"
+          },
+          "presentHeaders": [
+            "strict-transport-security",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy"
+          ],
+          "missingHeaders": [
+            "content-security-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "Blumen Krätzer",
+    "inputUrl": "https://www.blumen-kraetzer.de/",
+    "url": "https://www.blumen-kraetzer.de/",
+    "checkedAt": "2026-07-24T16:08:12.517Z",
+    "overallStatus": "red",
+    "categories": {
+      "trackers": {
+        "status": "red",
+        "summary": "2 externe Domain(s) laden vor jeglicher Consent-Entscheidung, kein Cookie-Banner gefunden.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [
+            "hello.myfonts.net",
+            "s.w.org"
+          ],
+          "cookieBannerFound": false,
+          "cookieBannerRejectWorked": null,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "yellow",
+        "summary": "2 schwerwiegende(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 0,
+            "serious": 2,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass der Kontrast zwischen Vorder- und Hintergrundfarbe den in der WCAG 2 als AA ausgewiesenen Kontrastgrenzwerten entspricht.",
+              "help": "Elemente müssen einen ausreichenden Farbkontrast haben.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=playwright",
+              "nodeCount": 2
+            },
+            {
+              "id": "link-name",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass Links wahrnehmbaren Text beinhalten.",
+              "help": "Links müssen wahrnehmbaren Text beinhalten.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-name?application=playwright",
+              "nodeCount": 6
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://www.blumen-kraetzer.de/impressum/",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://www.blumen-kraetzer.de/datenschutzerklaerung/"
+        }
+      },
+      "security": {
+        "status": "yellow",
+        "summary": "6 von 6 sicherheitsrelevanten HTTP-Headern fehlen.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-11-05T15:15:52.000Z",
+            "daysRemaining": 104,
+            "issuer": "Starfield Technologies, Inc."
+          },
+          "presentHeaders": [],
+          "missingHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "RKC Steuerberater",
+    "inputUrl": "https://www.rkc-steuerberater.de/",
+    "url": "https://www.rkc-steuerberater.de/",
+    "checkedAt": "2026-07-24T16:08:12.325Z",
+    "overallStatus": "red",
+    "categories": {
+      "trackers": {
+        "status": "red",
+        "summary": "3 externe Domain(s) laden vor jeglicher Consent-Entscheidung, kein Cookie-Banner gefunden.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [
+            "cdn.jsdelivr.net",
+            "d3e54v103j8qbb.cloudfront.net",
+            "uploads-ssl.webflow.com"
+          ],
+          "cookieBannerFound": false,
+          "cookieBannerRejectWorked": null,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "green",
+        "summary": "Keine automatisiert erkennbaren Barrierefreiheits-Probleme gefunden.",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 0,
+            "serious": 0,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": []
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://www.rkc-steuerberater.de/impressum.html",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://www.rkc-steuerberater.de/datenschutz.html"
+        }
+      },
+      "security": {
+        "status": "yellow",
+        "summary": "6 von 6 sicherheitsrelevanten HTTP-Headern fehlen.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-09-12T12:15:00.000Z",
+            "daysRemaining": 50,
+            "issuer": "Let's Encrypt"
+          },
+          "presentHeaders": [],
+          "missingHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "Hauptmann-Uhl & Kollegen",
+    "inputUrl": "https://steuer-goeppingen.de/",
+    "url": "https://steuer-goeppingen.de/",
+    "checkedAt": "2026-07-24T16:08:15.181Z",
+    "overallStatus": "red",
+    "categories": {
+      "trackers": {
+        "status": "red",
+        "summary": "7 externe Domain(s) laden vor jeglicher Consent-Entscheidung, kein Cookie-Banner gefunden.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [
+            "use.typekit.net",
+            "fonts.googleapis.com",
+            "www.googletagmanager.com",
+            "www.google.com",
+            "fonts.gstatic.com",
+            "www.gstatic.com",
+            "region1.google-analytics.com"
+          ],
+          "cookieBannerFound": false,
+          "cookieBannerRejectWorked": null,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "yellow",
+        "summary": "3 schwerwiegende(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 0,
+            "serious": 3,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass der Kontrast zwischen Vorder- und Hintergrundfarbe den in der WCAG 2 als AA ausgewiesenen Kontrastgrenzwerten entspricht.",
+              "help": "Elemente müssen einen ausreichenden Farbkontrast haben.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=playwright",
+              "nodeCount": 8
+            },
+            {
+              "id": "link-in-text-block",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass Links vom umgebenden Text nicht allein durch die Farbe unterschieden werden können.",
+              "help": "Links müssen vom umgebenden Text auf eine Weise unterschieden werden können, die nicht allein auf Farbe beruht.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-in-text-block?application=playwright",
+              "nodeCount": 1
+            },
+            {
+              "id": "link-name",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass Links wahrnehmbaren Text beinhalten.",
+              "help": "Links müssen wahrnehmbaren Text beinhalten.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-name?application=playwright",
+              "nodeCount": 2
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://steuer-goeppingen.de/impressum/",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://steuer-goeppingen.de/datenschutz/"
+        }
+      },
+      "security": {
+        "status": "yellow",
+        "summary": "6 von 6 sicherheitsrelevanten HTTP-Headern fehlen.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-09-23T23:59:59.000Z",
+            "daysRemaining": 61,
+            "issuer": "Sectigo Limited"
+          },
+          "presentHeaders": [],
+          "missingHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "EHNI HÖSS WAGNER Steuerberater",
+    "inputUrl": "https://www.steuerberater-gp.de/",
+    "url": "https://www.steuerberater-gp.de/",
+    "checkedAt": "2026-07-24T16:08:17.461Z",
+    "overallStatus": "yellow",
+    "categories": {
+      "trackers": {
+        "status": "green",
+        "summary": "Keine externen Anfragen vor einer Consent-Entscheidung festgestellt.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [],
+          "cookieBannerFound": false,
+          "cookieBannerRejectWorked": null,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "yellow",
+        "summary": "2 schwerwiegende(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 0,
+            "serious": 2,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass der Kontrast zwischen Vorder- und Hintergrundfarbe den in der WCAG 2 als AA ausgewiesenen Kontrastgrenzwerten entspricht.",
+              "help": "Elemente müssen einen ausreichenden Farbkontrast haben.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=playwright",
+              "nodeCount": 1
+            },
+            {
+              "id": "link-in-text-block",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass Links vom umgebenden Text nicht allein durch die Farbe unterschieden werden können.",
+              "help": "Links müssen vom umgebenden Text auf eine Weise unterschieden werden können, die nicht allein auf Farbe beruht.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-in-text-block?application=playwright",
+              "nodeCount": 2
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://www.steuerberater-gp.de/impressum/",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://www.steuerberater-gp.de/datenschutz/"
+        }
+      },
+      "security": {
+        "status": "yellow",
+        "summary": "6 von 6 sicherheitsrelevanten HTTP-Headern fehlen.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-09-01T17:33:10.000Z",
+            "daysRemaining": 39,
+            "issuer": "Let's Encrypt"
+          },
+          "presentHeaders": [],
+          "missingHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "Kanzlei Behrendt",
+    "inputUrl": "https://www.behrendt-anwaelte.de/",
+    "url": "https://www.behrendt-anwaelte.de/",
+    "checkedAt": "2026-07-24T16:08:22.226Z",
+    "overallStatus": "red",
+    "categories": {
+      "trackers": {
+        "status": "yellow",
+        "summary": "1 externe Domain(s) laden vor der Consent-Entscheidung. Banner vorhanden und Ablehnen-Funktion blockiert weitere externe Anfragen korrekt.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [
+            "strato-editor.com"
+          ],
+          "cookieBannerFound": true,
+          "cookieBannerRejectWorked": true,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "red",
+        "summary": "2 kritische(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 2,
+            "serious": 1,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "button-name",
+              "impact": "critical",
+              "impactLabel": "Kritisch",
+              "description": "Stellt sicher, dass Schaltflächen wahrnehmbaren Text enthalten.",
+              "help": "Schaltflächen müssen wahrnehmbaren Text enthalten.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/button-name?application=playwright",
+              "nodeCount": 3
+            },
+            {
+              "id": "label",
+              "impact": "critical",
+              "impactLabel": "Kritisch",
+              "description": "Stellt sicher, dass jedes <form>-Element über eine Beschriftung verfügt.",
+              "help": "<form>-Elemente müssen eine Beschriftung haben.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/label?application=playwright",
+              "nodeCount": 3
+            },
+            {
+              "id": "nested-interactive",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass interaktive Steuerelemente nicht verschachtelt (nested) sind, da sie nicht immer von Bildschirmlesegeräten angezeigt werden oder Probleme bei der Fokussierung von Hilfstechnologien verursachen können.",
+              "help": "Interaktive Steuerelemente dürfen nicht verschachtelt (nested) werden.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/nested-interactive?application=playwright",
+              "nodeCount": 3
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://behrendt-anwaelte.de/Kontakt/Impressum/",
+          "datenschutzFound": true,
+          "datenschutzUrl": "https://behrendt-anwaelte.de/Kontakt/Impressum/"
+        }
+      },
+      "security": {
+        "status": "yellow",
+        "summary": "6 von 6 sicherheitsrelevanten HTTP-Headern fehlen.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": true,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-09-22T23:59:59.000Z",
+            "daysRemaining": 60,
+            "issuer": "Sectigo Limited"
+          },
+          "presentHeaders": [],
+          "missingHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  },
+  {
+    "name": "ALEX MEDICAL FITNESS",
+    "inputUrl": "https://alex-medical-fitness.de/",
+    "url": "https://alex-medical-fitness.de/",
+    "checkedAt": "2026-07-24T16:08:22.122Z",
+    "overallStatus": "red",
+    "categories": {
+      "trackers": {
+        "status": "red",
+        "summary": "2 externe Domain(s) laden vor jeglicher Consent-Entscheidung, kein Cookie-Banner gefunden.",
+        "details": {
+          "errors": [],
+          "preConsentExternalDomains": [
+            "cdn-cookieyes.com",
+            "cdn.trustindex.io"
+          ],
+          "cookieBannerFound": false,
+          "cookieBannerRejectWorked": null,
+          "newExternalRequestsAfterReject": []
+        }
+      },
+      "accessibility": {
+        "status": "yellow",
+        "summary": "2 schwerwiegende(s) automatisiert erkannte Barrierefreiheits-Problem(e).",
+        "details": {
+          "errors": [],
+          "violationsByImpact": {
+            "critical": 0,
+            "serious": 2,
+            "moderate": 0,
+            "minor": 0
+          },
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass der Kontrast zwischen Vorder- und Hintergrundfarbe den in der WCAG 2 als AA ausgewiesenen Kontrastgrenzwerten entspricht.",
+              "help": "Elemente müssen einen ausreichenden Farbkontrast haben.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=playwright",
+              "nodeCount": 11
+            },
+            {
+              "id": "link-in-text-block",
+              "impact": "serious",
+              "impactLabel": "Schwerwiegend",
+              "description": "Stellt sicher, dass Links vom umgebenden Text nicht allein durch die Farbe unterschieden werden können.",
+              "help": "Links müssen vom umgebenden Text auf eine Weise unterschieden werden können, die nicht allein auf Farbe beruht.",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/link-in-text-block?application=playwright",
+              "nodeCount": 1
+            }
+          ]
+        }
+      },
+      "legalTexts": {
+        "status": "green",
+        "summary": "Impressum und Datenschutzerklärung sind verlinkt auffindbar.",
+        "details": {
+          "errors": [],
+          "impressumFound": true,
+          "impressumUrl": "https://thiess-medical-fitness.de/impressum/",
+          "datenschutzFound": true,
+          "datenschutzUrl": "http://copy.thiess-medical-fitness.de/datenschutz/"
+        }
+      },
+      "security": {
+        "status": "red",
+        "summary": "HTTP wird nicht automatisch auf HTTPS umgeleitet.",
+        "details": {
+          "errors": [],
+          "httpsEnforced": false,
+          "certificate": {
+            "valid": true,
+            "authorized": true,
+            "expiresAt": "2026-09-02T17:49:19.000Z",
+            "daysRemaining": 40,
+            "issuer": "Let's Encrypt"
+          },
+          "presentHeaders": [],
+          "missingHeaders": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "x-frame-options",
+            "referrer-policy",
+            "permissions-policy"
+          ]
+        }
+      }
+    },
+    "errors": []
+  }
+]

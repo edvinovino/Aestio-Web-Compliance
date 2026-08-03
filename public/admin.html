@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aestio § Web Compliance — Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .scan-list { list-style: none; border-top: 1px solid var(--line); }
+  .scan-list li {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 4px; border-bottom: 1px solid var(--line);
+    cursor: pointer; font-size: 14.5px;
+  }
+  .scan-list li:hover { background: var(--cream-2); }
+  .scan-list .url { flex: 1; font-weight: 500; }
+  .scan-list .date { color: var(--slate); font-size: 13px; }
+  .back-link { display: inline-block; margin-bottom: 20px; color: var(--slate); font-size: 13.5px; }
+  .back-link:hover { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="/" class="logo">
+      <span class="brand">Aesti<span class="o">o</span></span>
+      <span class="para">§</span>
+      <span class="sub">Web Compliance — Admin</span>
+    </a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero" style="padding-bottom:20px;">
+    <div class="eyebrow"><span class="mark">§</span> Interner Bereich</div>
+    <h1>Vollständige Scan-Berichte</h1>
+    <p class="lead">Nur über gültiges Admin-Token sichtbar. Kunden sehen ausschließlich die Ampel-Zusammenfassung.</p>
+  </section>
+
+  <section id="list-view">
+    <ul class="scan-list" id="scan-list"></ul>
+  </section>
+
+  <section id="detail-view" style="display:none;">
+    <a href="#" class="back-link" id="back-link">‹ Zurück zur Übersicht</a>
+    <div id="detail-content"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Aestio Web Compliance — Admin-Bereich, nicht für Kunden sichtbar.</div>
+</footer>
+
+<script type="module" src="admin.js"></script>
+</body>
+</html>

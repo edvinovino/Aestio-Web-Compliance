@@ -1,0 +1,5 @@
+node_modules/
+reports/
+admin-token.txt
+.DS_Store
+**/.DS_Store

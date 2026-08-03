@@ -1,0 +1,17 @@
+{
+  "name": "aestio-scanner",
+  "version": "1.0.0",
+  "description": "Aestio Web Compliance Scanner — Self-Service technisches Compliance-Audit fuer beliebige Websites.",
+  "type": "module",
+  "scripts": {
+    "install-browsers": "playwright install chromium",
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "@axe-core/playwright": "^4.9.1",
+    "exceljs": "^4.4.0",
+    "express": "^4.19.2",
+    "playwright": "^1.46.0"
+  }
+}
