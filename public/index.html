@@ -497,9 +497,9 @@
             <div class="mockup-body" id="stateIdle">
               <p style="font-size:14px;color:var(--cream);font-weight:500;margin-bottom:14px;">👉 Testen Sie es direkt an Ihrer eigenen Website:</p>
               <div style="display:flex;gap:8px;">
-                <input id="urlInput" type="text" placeholder="www.ihre-website.de" onkeydown="if(event.key==='Enter')runHeroScan()" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:var(--cream);padding:11px 14px;border-radius:4px;font-size:14px;font-family:inherit;">
+                <input id="urlInput" type="text" placeholder="www.ihre-website.de" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:var(--cream);padding:11px 14px;border-radius:4px;font-size:14px;font-family:inherit;">
               </div>
-              <button onclick="runHeroScan()" class="cta-btn" style="width:100%;margin-top:12px;justify-content:center;display:flex;">Jetzt kostenlos scannen</button>
+              <button id="scanBtn" class="cta-btn" style="width:100%;margin-top:12px;justify-content:center;display:flex;">Jetzt kostenlos scannen</button>
               <p id="scanError" style="display:none;margin-top:10px;font-size:12.5px;color:#E39B8F;"></p>
             </div>
 
@@ -787,6 +787,11 @@
     security: 'TLS & Security-Header',
     aiTransparency: 'KI-Transparenz',
   };
+
+  document.getElementById('scanBtn').addEventListener('click', runHeroScan);
+  document.getElementById('urlInput').addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') runHeroScan();
+  });
 
   async function runHeroScan(){
     const input = document.getElementById('urlInput');
