@@ -20,6 +20,42 @@
   .scan-list .date { color: var(--slate); font-size: 13px; }
   .back-link { display: inline-block; margin-bottom: 20px; color: var(--slate); font-size: 13.5px; }
   .back-link:hover { color: var(--gold); }
+
+  .tabs { display: flex; gap: 8px; margin: 24px 0 8px; border-bottom: 1px solid var(--line); }
+  .tab-btn {
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    font-size: 14.5px; padding: 10px 16px; color: var(--slate);
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+  }
+  .tab-btn.active { color: var(--navy); border-bottom-color: var(--gold); font-weight: 600; }
+
+  .status-pill {
+    display: inline-block; font-size: 11.5px; font-weight: 600; letter-spacing: .3px;
+    padding: 3px 10px; border-radius: 20px; text-transform: uppercase;
+    background: var(--cream-2); color: var(--slate);
+  }
+  .status-pill.erledigt { background: #DCEEDD; color: #2E6B37; }
+  .status-pill.kontaktiert { background: #FBEFD9; color: #8A6414; }
+
+  .inquiry-list li { justify-content: space-between; }
+  .inquiry-list .type-tag { font-size: 12px; color: var(--slate); width: 90px; }
+
+  .notes-box {
+    width: 100%; min-height: 140px; margin-top: 16px; padding: 12px;
+    font-family: inherit; font-size: 14px; border: 1px solid var(--line);
+    border-radius: 6px; resize: vertical; background: var(--cream-2);
+  }
+  .save-btn {
+    margin-top: 10px; background: var(--navy); color: var(--cream);
+    border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;
+    font-family: inherit; font-size: 14px;
+  }
+  .save-btn:hover { background: var(--navy-2); }
+  .save-status { margin-left: 12px; font-size: 13px; color: var(--slate); }
+  .record-box {
+    background: var(--cream-2); border-radius: 6px; padding: 16px;
+    font-size: 13.5px; white-space: pre-wrap; word-break: break-word;
+  }
 </style>
 </head>
 <body>
@@ -41,13 +77,27 @@
     <p class="lead">Nur über gültiges Admin-Token sichtbar. Kunden sehen ausschließlich die Ampel-Zusammenfassung.</p>
   </section>
 
+  <div class="tabs">
+    <button class="tab-btn active" id="tab-reports" type="button">Scan-Berichte</button>
+    <button class="tab-btn" id="tab-inquiries" type="button">Kunden-Anfragen</button>
+  </div>
+
   <section id="list-view">
     <ul class="scan-list" id="scan-list"></ul>
+  </section>
+
+  <section id="inquiry-list-view" style="display:none;">
+    <ul class="scan-list inquiry-list" id="inquiry-list"></ul>
   </section>
 
   <section id="detail-view" style="display:none;">
     <a href="#" class="back-link" id="back-link">‹ Zurück zur Übersicht</a>
     <div id="detail-content"></div>
+  </section>
+
+  <section id="inquiry-detail-view" style="display:none;">
+    <a href="#" class="back-link" id="inquiry-back-link">‹ Zurück zur Übersicht</a>
+    <div id="inquiry-detail-content"></div>
   </section>
 </main>
 

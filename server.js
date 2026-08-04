@@ -4,7 +4,16 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { validateAndNormalizeUrl } from './src/urlGuard.js';
 import { runScan } from './src/scanEngine.js';
-import { getAdminToken, saveReport, listReports, getReport, archiveInquiry } from './src/reportStore.js';
+import {
+  getAdminToken,
+  saveReport,
+  listReports,
+  getReport,
+  archiveInquiry,
+  listInquiries,
+  getInquiry,
+  updateInquiryNotes,
+} from './src/reportStore.js';
 import { buildPublicSummary } from './src/publicSummary.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -150,6 +159,27 @@ app.get('/admin/api/reports/:id', requireAdminToken, async (req, res) => {
     return res.status(404).json({ error: 'Bericht nicht gefunden.' });
   }
   res.json(report);
+});
+
+app.get('/admin/api/inquiries', requireAdminToken, async (req, res) => {
+  res.json(await listInquiries());
+});
+
+app.get('/admin/api/inquiries/:month/:folder', requireAdminToken, async (req, res) => {
+  const inquiry = await getInquiry(req.params.month, req.params.folder);
+  if (!inquiry) {
+    return res.status(404).json({ error: 'Anfrage nicht gefunden.' });
+  }
+  res.json(inquiry);
+});
+
+app.put('/admin/api/inquiries/:month/:folder/notes', requireAdminToken, async (req, res) => {
+  try {
+    await updateInquiryNotes(req.params.month, req.params.folder, req.body?.notes || '');
+    res.json({ ok: true });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 });
 
 app.listen(PORT, async () => {

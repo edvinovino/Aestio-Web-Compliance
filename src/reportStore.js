@@ -121,3 +121,79 @@ export async function archiveInquiry({ type, label, payload }) {
 
   return dir;
 }
+
+const MONTH_PATTERN = /^\d{4}-\d{2}$/;
+const FOLDER_PATTERN = /^[0-9a-z_-]+$/;
+
+function firstLineStatus(notes) {
+  const match = /^Status:\s*(.*)$/m.exec(notes || '');
+  return match ? match[1].trim() || 'NEU' : 'NEU';
+}
+
+/**
+ * Liste aller archivierten Kunden-Anfragen (neueste zuerst), fuers Admin-Panel
+ * und den lokalen Sync. Liest pro Ordner die record-Datei + notizen.txt.
+ */
+export async function listInquiries() {
+  await fs.mkdir(KUNDEN_ANFRAGEN_DIR, { recursive: true });
+  const months = (await fs.readdir(KUNDEN_ANFRAGEN_DIR)).filter((m) => MONTH_PATTERN.test(m));
+
+  const entries = [];
+  for (const month of months) {
+    const monthPath = path.join(KUNDEN_ANFRAGEN_DIR, month);
+    const folders = (await fs.readdir(monthPath).catch(() => [])).filter((f) => FOLDER_PATTERN.test(f));
+
+    for (const folder of folders) {
+      const dir = path.join(monthPath, folder);
+      try {
+        const files = await fs.readdir(dir);
+        const recordFile = files.find((f) => f === 'scan-ergebnis.json' || f === 'anfrage.json');
+        if (!recordFile) continue;
+        const record = JSON.parse(await fs.readFile(path.join(dir, recordFile), 'utf-8'));
+        const notes = await fs.readFile(path.join(dir, 'notizen.txt'), 'utf-8').catch(() => '');
+        entries.push({
+          month,
+          folder,
+          type: record.type,
+          label: record.url || record.company || record.name || folder,
+          receivedAt: record.receivedAt,
+          status: firstLineStatus(notes),
+        });
+      } catch {
+        // einzelner defekter Ordner soll die restliche Liste nicht blockieren
+      }
+    }
+  }
+
+  return entries.sort((a, b) => new Date(b.receivedAt) - new Date(a.receivedAt));
+}
+
+/**
+ * Voller Inhalt einer einzelnen Anfrage (Record + Notizen-Text) fuer
+ * Admin-Detailansicht und lokalen Sync.
+ */
+export async function getInquiry(month, folder) {
+  if (!MONTH_PATTERN.test(month) || !FOLDER_PATTERN.test(folder)) return null;
+  const dir = path.join(KUNDEN_ANFRAGEN_DIR, month, folder);
+  try {
+    const files = await fs.readdir(dir);
+    const recordFile = files.find((f) => f === 'scan-ergebnis.json' || f === 'anfrage.json');
+    if (!recordFile) return null;
+    const record = JSON.parse(await fs.readFile(path.join(dir, recordFile), 'utf-8'));
+    const notes = await fs.readFile(path.join(dir, 'notizen.txt'), 'utf-8').catch(() => '');
+    return { record, notes, recordFile };
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Ueberschreibt die notizen.txt einer Anfrage (Status/Notizen manuell
+ * abhaken, direkt aus dem Admin-Panel).
+ */
+export async function updateInquiryNotes(month, folder, notes) {
+  if (!MONTH_PATTERN.test(month) || !FOLDER_PATTERN.test(folder)) throw new Error('Ungueltige ID.');
+  const dir = path.join(KUNDEN_ANFRAGEN_DIR, month, folder);
+  await fs.access(dir);
+  await fs.writeFile(path.join(dir, 'notizen.txt'), notes, 'utf-8');
+}
