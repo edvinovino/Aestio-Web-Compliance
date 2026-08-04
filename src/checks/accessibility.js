@@ -28,6 +28,15 @@ export async function scanAccessibility(page) {
   };
 
   try {
+    // Seiten mit Scroll-/Fade-in-Animationen (transition-opacity) koennen sonst
+    // mitten in der Transition erwischt werden -> Axe misst dann eine
+    // Zwischenfarbe und meldet einen Kontrast-Fehler, der im fertig
+    // gerenderten Zustand gar nicht existiert. Erzwingt den Endzustand vor der
+    // Kontrastmessung.
+    await page.addStyleTag({
+      content: '*, *::before, *::after { transition: none !important; animation: none !important; }',
+    });
+
     const axeResults = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
 
     for (const v of axeResults.violations) {
