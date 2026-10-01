@@ -4,12 +4,14 @@ import { scanAccessibility } from './checks/accessibility.js';
 import { checkLegalTexts } from './checks/legalTexts.js';
 import { checkSecurity } from './checks/security.js';
 import { isChatbotRequest, checkAiTransparency } from './checks/aiTransparency.js';
+import { checkShopCompliance } from './checks/shopCompliance.js';
 import {
   scoreTrackers,
   scoreAccessibility,
   scoreLegalTexts,
   scoreSecurity,
   scoreAiTransparency,
+  scoreShopCompliance,
   buildOverallStatus,
 } from './scoring.js';
 
@@ -29,17 +31,19 @@ async function runAccessibilityAndLegal(browser, targetUrl) {
     // plus fester Wartezeit ist robuster fuer beliebige, unbekannte Websites.
     await page.goto(targetUrl.toString(), { waitUntil: 'load', timeout: 20000 });
     await page.waitForTimeout(2000);
-    const [axeResult, legalResult, aiResult] = await Promise.all([
+    const [axeResult, legalResult, aiResult, shopResult] = await Promise.all([
       scanAccessibility(page),
       checkLegalTexts(page),
       checkAiTransparency(page, chatbotDomains),
+      checkShopCompliance(page),
     ]);
-    return { axeResult, legalResult, aiResult };
+    return { axeResult, legalResult, aiResult, shopResult };
   } catch (err) {
     return {
       axeResult: { errors: [`Seitenaufruf fehlgeschlagen: ${err.message}`], violationsByImpact: {}, violations: [] },
       legalResult: { errors: [`Seitenaufruf fehlgeschlagen: ${err.message}`], impressumFound: false, datenschutzFound: false },
       aiResult: { errors: [`Seitenaufruf fehlgeschlagen: ${err.message}`], chatbotDetected: false, chatbotDomains: [], disclosureFound: false },
+      shopResult: { errors: [`Seitenaufruf fehlgeschlagen: ${err.message}`], shopDetected: false },
     };
   } finally {
     await context.close();
@@ -54,7 +58,7 @@ export async function runScan(targetUrl) {
   const browser = await chromium.launch({ headless: true });
 
   try {
-    const [cookieResult, { axeResult, legalResult, aiResult }, securityResult] = await Promise.all([
+    const [cookieResult, { axeResult, legalResult, aiResult, shopResult }, securityResult] = await Promise.all([
       checkCookieConsent(browser, targetUrl),
       runAccessibilityAndLegal(browser, targetUrl),
       checkSecurity(targetUrl),
@@ -68,6 +72,13 @@ export async function runScan(targetUrl) {
       aiTransparency: { ...scoreAiTransparency(aiResult), details: aiResult },
     };
 
+    // Shop-Compliance ist ein optionales Modul: taucht im Bericht nur auf,
+    // wenn ueberhaupt ein Shop/Checkout erkannt wurde, damit reine
+    // Info-Seiten keinen irrelevanten Befund angezeigt bekommen.
+    if (shopResult.shopDetected) {
+      categories.shopCompliance = { ...scoreShopCompliance(shopResult), details: shopResult };
+    }
+
     const overallStatus = buildOverallStatus(Object.values(categories));
 
     const errors = [
@@ -76,6 +87,7 @@ export async function runScan(targetUrl) {
       ...legalResult.errors,
       ...securityResult.errors,
       ...aiResult.errors,
+      ...shopResult.errors,
     ];
 
     return {

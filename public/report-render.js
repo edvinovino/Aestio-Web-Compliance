@@ -9,6 +9,7 @@ const CATEGORY_META = {
   legalTexts: { name: 'Rechtstexte' },
   security: { name: 'TLS & Security-Header' },
   aiTransparency: { name: 'KI-Transparenz' },
+  shopCompliance: { name: 'Shop-Compliance' },
 };
 
 function escapeHtml(str) {
@@ -64,9 +65,19 @@ function renderCategoryDetails(key, details) {
         <dl>
           <dt>Chatbot-/Assistenten-Widget gefunden</dt><dd>${details.chatbotDetected ? 'Ja' : 'Nein'}</dd>
           <dt>KI-Hinweis im Seitentext gefunden</dt><dd>${details.disclosureFound ? 'Ja' : 'Nein'}</dd>
+          <dt>Hinweis nur im Footer/Kleingedruckten</dt><dd>${details.disclosureOnlyInFooter ? 'Ja — nicht ausreichend prominent' : 'Nein'}</dd>
         </dl>
         ${details.chatbotDomains?.length ? `<ul>${details.chatbotDomains.map((d) => `<li>${escapeHtml(d)}</li>`).join('')}</ul>` : ''}
-        <div class="note">Erkennt nur bekannte Chatbot-Anbieter über Domains plus eine Text-Heuristik für die KI-Kennzeichnung (Art. 50 Abs. 1 EU AI Act) — kein Nachweis über eingesetzte KI-Modelle oder KI-generierte Inhalte.</div>
+        <div class="note">Erkennt nur bekannte Chatbot-Anbieter über Domains plus eine Text-Heuristik für die KI-Kennzeichnung (Art. 50 EU AI Act) und ob sie außerhalb von Footer/Impressum/AGB auffindbar ist — kein Nachweis über eingesetzte KI-Modelle oder KI-generierte Inhalte.</div>
+      `;
+    case 'shopCompliance':
+      return `
+        <dl>
+          <dt>Widerrufsbelehrung verlinkt</dt><dd>${details.widerrufsbelehrungFound ? `gefunden (${escapeHtml(details.widerrufsbelehrungUrl)})` : 'nicht gefunden'}</dd>
+          <dt>Echter Widerrufs-Button gefunden</dt><dd>${details.widerrufsButtonFound ? 'Ja' : 'Nein'}</dd>
+          <dt>Grundpreis-Hinweis im Text erkannt</dt><dd>${details.grundpreisHinweisGefunden ? 'Ja' : 'Nein'}</dd>
+        </dl>
+        <div class="note">Shop/Checkout automatisiert erkannt. Prüft nur Vorhandensein einer Widerrufsbelehrung und eines eigenständigen Widerrufs-Buttons (Pflicht seit 19.6.2026) sowie einen groben Grundpreis-Texthinweis. Streichpreis-Korrektheit (30-Tage-Tiefstpreis) und exakte Grundpreis-Platzierung lassen sich aus einem einzelnen Seitenaufruf nicht verlässlich prüfen und sind hier nicht bewertet.</div>
       `;
     default:
       return '';

@@ -52,6 +52,12 @@ export function isChatbotRequest(url) {
  * EU AI Act, seit 2. August 2026 durchsetzbar). Erkennt nur bekannte Anbieter
  * plus eine Text-Heuristik - kein Nachweis ueber tatsaechlich eingesetzte
  * KI-Modelle, kein Erkennen von KI-generierten Inhalten/Deepfakes.
+ *
+ * Prueft zusaetzlich, ob jeder gefundene Hinweis nur innerhalb von Footer-
+ * bzw. Impressum/AGB-Bereichen liegt. Die finalen EU-Guidelines zu Art. 50
+ * (20. Juli 2026) verlangen eine "klar und eindeutig" wahrnehmbare
+ * Kennzeichnung, die nicht im Kleingedruckten versteckt werden darf - ein nur
+ * dort auffindbarer Hinweis erfuellt die Form-Anforderung nicht.
  */
 export async function checkAiTransparency(page, chatbotDomains) {
   const result = {
@@ -59,11 +65,32 @@ export async function checkAiTransparency(page, chatbotDomains) {
     chatbotDetected: chatbotDomains.length > 0,
     chatbotDomains: [...new Set(chatbotDomains)],
     disclosureFound: false,
+    disclosureOnlyInFooter: false,
   };
 
   try {
-    const bodyText = await page.evaluate(() => document.body?.innerText || '');
-    result.disclosureFound = DISCLOSURE_PATTERN.test(bodyText);
+    const { disclosureFound, disclosureOnlyInFooter } = await page.evaluate((patternSource) => {
+      const pattern = new RegExp(patternSource, 'i');
+      const BURIED_SELECTOR =
+        'footer, [class*="impressum" i], [id*="impressum" i], [class*="agb" i], [id*="agb" i]';
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      let found = false;
+      let foundOutsideBuried = false;
+      let node;
+      while ((node = walker.nextNode())) {
+        if (!pattern.test(node.textContent)) continue;
+        found = true;
+        const el = node.parentElement;
+        if (!el?.closest(BURIED_SELECTOR)) {
+          foundOutsideBuried = true;
+          break;
+        }
+      }
+      return { disclosureFound: found, disclosureOnlyInFooter: found && !foundOutsideBuried };
+    }, DISCLOSURE_PATTERN.source);
+
+    result.disclosureFound = disclosureFound;
+    result.disclosureOnlyInFooter = disclosureOnlyInFooter;
   } catch (err) {
     result.errors.push(`KI-Transparenz-Check-Fehler: ${err.message}`);
   }
