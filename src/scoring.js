@@ -79,10 +79,29 @@ export function scoreAiTransparency(ai) {
       summary: 'Chatbot-/Assistenten-Widget gefunden, aber kein sichtbarer KI-Hinweis im Seitentext gefunden.',
     };
   }
+  if (ai.chatbotDetected && ai.disclosureOnlyInFooter) {
+    return {
+      status: 'yellow',
+      summary: 'KI-Hinweis nur im Footer/Kleingedruckten gefunden — Art. 50 verlangt eine klar und eindeutig wahrnehmbare Kennzeichnung, nicht im Impressum/AGB versteckt.',
+    };
+  }
   if (ai.chatbotDetected) {
     return { status: 'green', summary: 'Chatbot-Widget gefunden, KI-Hinweis im Seitentext vorhanden.' };
   }
   return { status: 'green', summary: 'Kein bekanntes Chatbot-/KI-Assistenten-Widget erkannt.' };
+}
+
+export function scoreShopCompliance(shop) {
+  if (!shop.widerrufsbelehrungFound) {
+    return { status: 'red', summary: 'Shop/Checkout erkannt, aber keine Widerrufsbelehrung auffindbar.' };
+  }
+  if (!shop.widerrufsButtonFound) {
+    return {
+      status: 'yellow',
+      summary: 'Widerrufsbelehrung verlinkt, aber kein echter Widerrufs-Button gefunden (seit 19.6.2026 für B2C-Shops Pflicht, ein reiner Text-Link reicht nicht mehr).',
+    };
+  }
+  return { status: 'green', summary: 'Widerrufsbelehrung und ein klar beschrifteter Widerrufs-Button sind auffindbar.' };
 }
 
 export function buildOverallStatus(categoryScores) {
