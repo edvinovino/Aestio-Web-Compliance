@@ -1,4 +1,5 @@
 import tls from 'node:tls';
+import { assertAllowedHost, createSafeLookup, requestHeaders } from '../netGuard.js';
 
 const SECURITY_HEADERS = [
   'strict-transport-security',
@@ -13,6 +14,7 @@ const SECURITY_HEADERS = [
 // Zertifikat: sie ergeben { valid: null, error } und damit "nicht vollstaendig geprueft".
 const CONNECTION_ERROR_CODES = new Set([
   'ECONNREFUSED', 'ENOTFOUND', 'EAI_AGAIN', 'ETIMEDOUT', 'ECONNRESET', 'EHOSTUNREACH', 'ENETUNREACH', 'EPIPE',
+  'EBLOCKEDADDR', // Adressrichtlinie hat die Verbindung verhindert: Zertifikat nicht pruefbar, nicht "ungueltig"
 ]);
 
 function classifyTlsError(err) {
@@ -20,20 +22,10 @@ function classifyTlsError(err) {
   return { valid: false, reason: err.message };
 }
 
-async function fetchWithTimeout(url, options = {}, timeoutMs = 10000) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    return await fetch(url, { ...options, signal: controller.signal });
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
-function getTlsCertificateInfo(hostname) {
+function getTlsCertificateInfo(hostname, lookup) {
   return new Promise((resolve) => {
     const socket = tls.connect(
-      { host: hostname, port: 443, servername: hostname, timeout: 8000 },
+      { host: hostname, port: 443, servername: hostname, timeout: 8000, lookup },
       () => {
         const cert = socket.getPeerCertificate();
         const authorized = socket.authorized;
@@ -64,8 +56,13 @@ function getTlsCertificateInfo(hostname) {
 /**
  * Prueft HTTPS-Erzwingung, TLS-Zertifikat und sicherheitsrelevante HTTP-Header.
  * Rein technischer Check, keine Bewertung der Rechtstexte oder Inhalte.
+ * Alle Verbindungen laufen ueber die Adressrichtlinie (netGuard.js): gepruefte Aufloesung am Socket,
+ * jeder Redirect-Hop wird neu geprueft. `options.isPublic`/`options.lookupFn` sind Einhaengepunkte fuer Tests.
  */
-export async function checkSecurity(targetUrl) {
+export async function checkSecurity(targetUrl, options = {}) {
+  const { isPublic, lookupFn } = options;
+  const guard = { ...(isPublic ? { isPublic } : {}), ...(lookupFn ? { lookupFn } : {}) };
+  const safeLookup = createSafeLookup(guard);
   const result = {
     errors: [],
     completed: false,
@@ -80,9 +77,17 @@ export async function checkSecurity(targetUrl) {
 
   const hostname = targetUrl.hostname;
 
+  // IP-Literale und localhost umgehen jeden DNS-Lookup: vor dem ersten Verbindungsaufbau pruefen.
+  try {
+    assertAllowedHost(hostname, isPublic);
+  } catch (err) {
+    result.errors.push(`Ziel nicht erlaubt: ${err.message}`);
+    return result;
+  }
+
   try {
     if (targetUrl.protocol === 'https:') {
-      result.certificate = await getTlsCertificateInfo(hostname);
+      result.certificate = await getTlsCertificateInfo(hostname, safeLookup);
     }
   } catch (err) {
     result.errors.push(`TLS-Check-Fehler: ${err.message}`);
@@ -90,9 +95,9 @@ export async function checkSecurity(targetUrl) {
 
   try {
     const httpUrl = `http://${hostname}${targetUrl.port ? ':' + targetUrl.port : ''}/`;
-    const res = await fetchWithTimeout(httpUrl, { redirect: 'manual' });
+    const res = await requestHeaders(httpUrl, { ...guard, maxRedirects: 0 });
     if (res.status >= 300 && res.status < 400) {
-      const location = res.headers.get('location') || '';
+      const location = res.headers.location || '';
       result.httpsEnforced = location.startsWith('https://');
       result.httpsEnforcedBasis = 'redirect';
     } else if (res.status === 200) {
@@ -102,16 +107,18 @@ export async function checkSecurity(targetUrl) {
       result.httpsEnforced = null;
     }
   } catch (err) {
-    // http:// evtl. gar nicht erreichbar (z.B. Server nimmt nur https an) - dann als erzwungen werten
-    result.httpsEnforced = targetUrl.protocol === 'https:' ? true : null;
+    // http:// evtl. gar nicht erreichbar (z.B. Server nimmt nur https an) - dann als erzwungen werten.
+    // Hat die Adressrichtlinie die Verbindung verhindert, ist das KEINE Aussage ueber den HTTP-Port.
+    const blockedByPolicy = err.code === 'EBLOCKEDADDR';
+    result.httpsEnforced = targetUrl.protocol === 'https:' && !blockedByPolicy ? true : null;
     if (result.httpsEnforced === true) result.httpsEnforcedBasis = 'unreachable';
     result.errors.push(`HTTP-Redirect-Check: ${err.message}`);
   }
 
   try {
-    const res = await fetchWithTimeout(targetUrl.toString(), { redirect: 'follow' });
+    const res = await requestHeaders(targetUrl.toString(), { ...guard, maxRedirects: 5 });
     for (const header of SECURITY_HEADERS) {
-      if (res.headers.has(header)) {
+      if (header in res.headers) {
         result.presentHeaders.push(header);
       } else {
         result.missingHeaders.push(header);
