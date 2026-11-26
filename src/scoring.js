@@ -14,7 +14,7 @@ export function scoreTrackers(cc) {
   if (cc.preConsentExternalDomains.length > 0 && !cc.cookieBannerFound) {
     return {
       status: 'red',
-      summary: `${cc.preConsentExternalDomains.length} externe Domain(s) laden vor jeglicher Consent-Entscheidung, kein Cookie-Banner gefunden.`,
+      summary: `Vor einer Consent-Entscheidung wurden Verbindungen zu ${cc.preConsentExternalDomains.length} externen Domain(s) beobachtet. Ein Ablehnen-Element wurde nicht gefunden.`,
     };
   }
   if (cc.preConsentExternalDomains.length > 0) {
@@ -69,7 +69,17 @@ export function scoreSecurity(security) {
   if (security.missingHeaders?.length >= 4) {
     return { status: 'yellow', summary: `${security.missingHeaders.length} von ${security.missingHeaders.length + security.presentHeaders.length} sicherheitsrelevanten HTTP-Headern fehlen.` };
   }
-  return { status: 'green', summary: 'HTTPS wird erzwungen, Zertifikat gültig, sicherheitsrelevante Header größtenteils gesetzt.' };
+  return { status: 'green', summary: describeSecurity(security) };
+}
+
+// Nur Beobachtungen mit Zaehlern, keine Pauschalaussage ("erzwungen", "größtenteils").
+function describeSecurity(security) {
+  const present = security.presentHeaders?.length ?? 0;
+  const total = present + (security.missingHeaders?.length ?? 0);
+  const parts = [security.httpsEnforced === true ? 'HTTPS-Weiterleitung beobachtet' : 'HTTPS-Weiterleitung nicht ermittelt'];
+  if (security.certificate?.valid === true) parts.push('gültiges Zertifikat beobachtet');
+  if (total > 0) parts.push(`${present} von ${total} geprüften Sicherheits-Headern gesetzt`);
+  return `${parts.join('; ')}.`;
 }
 
 export function scoreAiTransparency(ai) {
@@ -82,7 +92,7 @@ export function scoreAiTransparency(ai) {
   if (ai.chatbotDetected && ai.disclosureOnlyInFooter) {
     return {
       status: 'yellow',
-      summary: 'KI-Hinweis nur im Footer/Kleingedruckten gefunden — Art. 50 verlangt eine klar und eindeutig wahrnehmbare Kennzeichnung, nicht im Impressum/AGB versteckt.',
+      summary: 'Ein KI-Hinweis wurde nur in Footer-, Impressum- oder AGB-Bereichen gefunden, nicht im übrigen sichtbaren Text. Manuelle Prüfung empfohlen.',
     };
   }
   if (ai.chatbotDetected) {
@@ -98,7 +108,7 @@ export function scoreShopCompliance(shop) {
   if (!shop.widerrufsButtonFound) {
     return {
       status: 'yellow',
-      summary: 'Widerrufsbelehrung verlinkt, aber kein echter Widerrufs-Button gefunden (seit 19.6.2026 für B2C-Shops Pflicht, ein reiner Text-Link reicht nicht mehr).',
+      summary: 'Widerrufsbelehrung verlinkt; ein Element mit Beschriftung wie „Vertrag widerrufen“ wurde per Textmuster nicht gefunden. Rechtsbezug (informativ): § 356a BGB.',
     };
   }
   return { status: 'green', summary: 'Widerrufsbelehrung und ein klar beschrifteter Widerrufs-Button sind auffindbar.' };

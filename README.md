@@ -8,7 +8,8 @@ laufenden Mehrkunden-Betrieb mit Baseline-Vergleich gedacht ist).
 
 **Wichtig:** Dies ist ein technisches Werkzeug, das regelbasiert Befunde
 liefert — keine juristische Bewertung. Automatisierte Barrierefreiheits-Scans
-decken erfahrungsgemäß nur ca. 30–40 % aller WCAG-Kriterien ab.
+decken nur einen Teil der WCAG-Kriterien ab; Tastatur-, Inhalts- und
+Verständlichkeitsprüfungen erfordern manuelle Prüfung.
 
 ## Geprüfte Bereiche
 

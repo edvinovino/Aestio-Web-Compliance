@@ -39,7 +39,7 @@ function renderCategoryDetails(key, details) {
           <dt>Gering</dt><dd>${v.minor || 0}</dd>
         </dl>
         ${(details.violations || []).length ? `<ul>${details.violations.map((viol) => `<li><strong>${escapeHtml(viol.impactLabel || viol.impact)}</strong>: ${escapeHtml(viol.help)} (${viol.nodeCount}× betroffen) — <a href="${escapeHtml(viol.helpUrl)}" target="_blank" rel="noopener">Regel-Doku</a></li>`).join('')}</ul>` : ''}
-        <div class="note">Automatisierte Scans decken erfahrungsgemäß nur ca. 30–40 % aller WCAG-Kriterien ab.</div>
+        <div class="note">Automatisierte Tests decken nur einen Teil der WCAG-Kriterien ab; Tastatur-, Inhalts- und Verständlichkeitsprüfungen erfordern manuelle Prüfung.</div>
       `;
     }
     case 'legalTexts':
@@ -77,7 +77,7 @@ function renderCategoryDetails(key, details) {
           <dt>Echter Widerrufs-Button gefunden</dt><dd>${details.widerrufsButtonFound ? 'Ja' : 'Nein'}</dd>
           <dt>Grundpreis-Hinweis im Text erkannt</dt><dd>${details.grundpreisHinweisGefunden ? 'Ja' : 'Nein'}</dd>
         </dl>
-        <div class="note">Shop/Checkout automatisiert erkannt. Prüft nur Vorhandensein einer Widerrufsbelehrung und eines eigenständigen Widerrufs-Buttons (Pflicht seit 19.6.2026) sowie einen groben Grundpreis-Texthinweis. Streichpreis-Korrektheit (30-Tage-Tiefstpreis) und exakte Grundpreis-Platzierung lassen sich aus einem einzelnen Seitenaufruf nicht verlässlich prüfen und sind hier nicht bewertet.</div>
+        <div class="note">Shop/Checkout automatisiert erkannt. Prüft nur Vorhandensein einer Widerrufsbelehrung und eines eigenständigen Widerrufs-Buttons (Textmuster-Suche) sowie einen groben Grundpreis-Texthinweis. Streichpreis-Korrektheit (30-Tage-Tiefstpreis) und exakte Grundpreis-Platzierung lassen sich aus einem einzelnen Seitenaufruf nicht verlässlich prüfen und sind hier nicht bewertet.</div>
       `;
     default:
       return '';
@@ -85,8 +85,9 @@ function renderCategoryDetails(key, details) {
 }
 
 export function renderReport(data) {
+  const scopeNote = `Umfang: Startseite, ${Object.keys(data.categories || {}).length} Prüfbereiche`;
   const overallLabel = {
-    green: 'Keine kritischen technischen Befunde',
+    green: `Bei den durchgeführten Prüfungen keine kritischen technischen Befunde festgestellt (${scopeNote})`,
     yellow: 'Einzelne Punkte sollten geprüft werden',
     red: 'Kritische technische Befunde festgestellt',
   }[data.overallStatus];

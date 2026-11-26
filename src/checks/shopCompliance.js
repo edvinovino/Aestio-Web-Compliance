@@ -1,7 +1,7 @@
 // Prueft rein technisch, ob die Seite ueberhaupt einen Shop/Checkout hat, und
 // falls ja, ob die zentralen Fernabsatz-Pflichten auffindbar sind: Widerruf
-// als echter, klar beschrifteter Button (Pflicht seit 19. Juni 2026 fuer
-// B2C-Online-Shops), nicht nur als Text-Link zu einer Belehrungs-Seite.
+// als echter, klar beschrifteter Button (vgl. § 356a BGB; Stichtag und
+// Anwendbarkeit nicht geprueft), nicht nur als Text-Link zu einer Belehrungs-Seite.
 // Streichpreis-/Grundpreis-Korrektheit laesst sich aus einem einzelnen
 // Seitenaufruf heraus nicht verlaesslich pruefen (benoetigt Preis-Historie
 // bzw. Produktseiten-Kontext) - Grundpreis-Hinweise werden daher nur als
