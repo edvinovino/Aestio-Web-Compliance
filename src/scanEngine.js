@@ -6,6 +6,7 @@ import { checkSecurity } from './checks/security.js';
 import { isChatbotRequest, checkAiTransparency } from './checks/aiTransparency.js';
 import { checkShopCompliance } from './checks/shopCompliance.js';
 import { assertUsableResponse } from './checks/navigation.js';
+import { startSafeProxy } from './safeProxy.js';
 import {
   scoreTrackers,
   scoreAccessibility,
@@ -61,11 +62,19 @@ async function runAccessibilityAndLegal(browser, targetUrl) {
  * `options.launch` / `options.securityCheck` sind Einhaengepunkte fuer Tests.
  */
 export async function runScan(targetUrl, options = {}) {
-  const launch = options.launch || (() => chromium.launch({ headless: true }));
-  const securityCheck = options.securityCheck || checkSecurity;
-  const browser = await launch();
+  // Adressrichtlinie (SSRF-Schutz): Chromium laeuft ausschliesslich ueber einen lokalen Filter-Proxy.
+  // `--proxy-bypass-list=<-loopback>` entfernt Chromiums impliziten Proxy-Bypass fuer localhost/Loopback/
+  // Link-Local (Absicherung; Playwright macht das fuer die proxy-Option bereits selbst, siehe safeProxy.js).
+  const guard = { ...(options.isPublic ? { isPublic: options.isPublic } : {}), ...(options.lookupFn ? { lookupFn: options.lookupFn } : {}) };
+  const proxy = options.launch ? null : await startSafeProxy(guard);
+  const launch =
+    options.launch ||
+    (() => chromium.launch({ headless: true, proxy: { server: proxy.url }, args: ['--proxy-bypass-list=<-loopback>'] }));
+  const securityCheck = options.securityCheck || ((url) => checkSecurity(url, guard));
+  let browser;
 
   try {
+    browser = await launch();
     const [cookieResult, { axeResult, legalResult, aiResult, shopResult }, securityResult] = await Promise.all([
       checkCookieConsent(browser, targetUrl),
       runAccessibilityAndLegal(browser, targetUrl),
@@ -92,6 +101,7 @@ export async function runScan(targetUrl, options = {}) {
     const overallStatus = buildOverallStatus(scores);
     const coverage = buildCoverage(scores);
 
+    const blockedRequests = proxy ? proxy.blocked() : [];
     const errors = [
       ...cookieResult.errors,
       ...axeResult.errors,
@@ -100,6 +110,10 @@ export async function runScan(targetUrl, options = {}) {
       ...aiResult.errors,
       ...shopResult.errors,
     ];
+    // Von der Netzwerkrichtlinie blockierte Ziele sind eine Beobachtung, die Ergebnisse beeinflussen kann.
+    if (blockedRequests.length > 0) {
+      errors.push(`Von der Netzwerkrichtlinie blockierte Anfragen: ${blockedRequests.join(', ')}`);
+    }
 
     return {
       url: targetUrl.toString(),
@@ -107,10 +121,12 @@ export async function runScan(targetUrl, options = {}) {
       overallStatus,
       coverage,
       incomplete: coverage.unknown > 0,
+      blockedRequests,
       categories,
       errors,
     };
   } finally {
-    await browser.close();
+    await browser?.close();
+    await proxy?.close();
   }
 }
