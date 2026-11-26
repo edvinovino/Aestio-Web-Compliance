@@ -62,6 +62,7 @@ export function isChatbotRequest(url) {
 export async function checkAiTransparency(page, chatbotDomains) {
   const result = {
     errors: [],
+    completed: false,
     chatbotDetected: chatbotDomains.length > 0,
     chatbotDomains: [...new Set(chatbotDomains)],
     disclosureFound: false,
@@ -91,6 +92,7 @@ export async function checkAiTransparency(page, chatbotDomains) {
 
     result.disclosureFound = disclosureFound;
     result.disclosureOnlyInFooter = disclosureOnlyInFooter;
+    result.completed = true;
   } catch (err) {
     result.errors.push(`KI-Transparenz-Check-Fehler: ${err.message}`);
   }

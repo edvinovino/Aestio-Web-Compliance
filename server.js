@@ -94,6 +94,13 @@ app.post('/api/scan', async (req, res) => {
   try {
     const fullReport = await runScan(targetUrl);
     await saveReport(fullReport); // voller Bericht bleibt privat, Kunde bekommt nur die Zusammenfassung
+    if (fullReport.coverage.completed === 0) {
+      // Nichts konnte geprueft werden (Seite nicht erreichbar / Zugriff verweigert): kein Bericht, der
+      // wie ein Ergebnis aussieht, und kein Eintrag in der Anfragen-Ablage.
+      return res.status(502).json({
+        error: 'Die Seite konnte nicht geprüft werden (nicht erreichbar oder Zugriff verweigert). Bitte später erneut versuchen.',
+      });
+    }
     const summary = buildPublicSummary(fullReport);
     await archiveInquiry({
       type: 'scan',

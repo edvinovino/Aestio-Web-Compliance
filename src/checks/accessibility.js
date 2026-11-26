@@ -16,13 +16,14 @@ const IMPACT_LABELS_DE = {
 
 /**
  * Automatisierter Barrierefreiheits-Scan (WCAG 2.1 AA) via axe-core.
- * Wichtig: automatisierte Scans finden erfahrungsgemaess nur ca. 30-40% aller
- * WCAG-Probleme. Das ersetzt keinen manuellen Test, ist aber ein zuverlaessiger
- * Frueh-Indikator.
+ * Wichtig: automatisierte Tests decken nur einen Teil der WCAG-Kriterien ab.
+ * Das ersetzt keinen manuellen Test (Tastatur, Inhalte, Verstaendlichkeit) und ist
+ * keine WCAG-Konformitaetspruefung; die Ergebnisse sind ein Frueh-Indikator.
  */
 export async function scanAccessibility(page) {
   const result = {
     errors: [],
+    completed: false,
     violationsByImpact: { critical: 0, serious: 0, moderate: 0, minor: 0 },
     violations: [],
   };
@@ -52,6 +53,7 @@ export async function scanAccessibility(page) {
         nodeCount: v.nodes.length,
       });
     }
+    result.completed = true;
   } catch (err) {
     result.errors.push(`Accessibility-Scan-Fehler: ${err.message}`);
   }

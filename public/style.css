@@ -161,6 +161,7 @@ h1 em { font-style: italic; color: var(--gold); font-weight: 400; }
 .dot.green { background: var(--green); }
 .dot.yellow { background: var(--yellow); }
 .dot.red { background: var(--red); }
+.dot.unknown { background: #8A8F98; } /* nicht vollstaendig geprueft */
 
 .overall-banner .title { font-family: 'Playfair Display', serif; font-size: 19px; }
 .overall-banner .sub { font-size: 13.5px; color: var(--slate); margin-top: 2px; }

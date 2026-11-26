@@ -3,12 +3,13 @@ const DATENSCHUTZ_PATTERN = /datenschutz|privacy( policy)?/i;
 
 /**
  * Prueft rein technisch, ob Links zu Impressum und Datenschutzerklaerung auf
- * der Seite auffindbar sind (Pflicht nach TMG/DSGVO). Keine inhaltliche
+ * der Seite auffindbar sind (vgl. § 5 DDG; informativ). Keine inhaltliche
  * Bewertung der Texte selbst.
  */
 export async function checkLegalTexts(page) {
   const result = {
     errors: [],
+    completed: false,
     impressumFound: false,
     impressumUrl: null,
     datenschutzFound: false,
@@ -34,6 +35,7 @@ export async function checkLegalTexts(page) {
         result.datenschutzUrl = link.href;
       }
     }
+    result.completed = true;
   } catch (err) {
     result.errors.push(`Rechtstexte-Check-Fehler: ${err.message}`);
   }

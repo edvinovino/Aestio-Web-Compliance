@@ -6,7 +6,8 @@
   "scripts": {
     "install-browsers": "playwright install chromium",
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "test": "node --test"
   },
   "dependencies": {
     "@axe-core/playwright": "^4.9.1",
