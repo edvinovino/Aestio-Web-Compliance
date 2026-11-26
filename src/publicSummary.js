@@ -34,6 +34,8 @@ const ISSUE_COUNTERS = {
  * und Anzahl der Befunde je Bereich, ohne Domains, Regel-Details, Header-Namen
  * oder URLs. Die vollstaendigen Details bleiben ausschliesslich im intern
  * gespeicherten Bericht (siehe reportStore.js).
+ * Bereiche mit Status 'unknown' (nicht vollstaendig geprueft) liefern issueCount null,
+ * niemals 0: "0 Befunde" waere eine Aussage ueber etwas, das nicht geprueft wurde.
  */
 export function buildPublicSummary(fullReport) {
   const categories = {};
@@ -41,7 +43,7 @@ export function buildPublicSummary(fullReport) {
     const counter = ISSUE_COUNTERS[key];
     categories[key] = {
       status: category.status,
-      issueCount: counter ? counter(category.details) : 0,
+      issueCount: category.status === 'unknown' ? null : counter ? counter(category.details) : 0,
     };
   }
 
@@ -49,6 +51,8 @@ export function buildPublicSummary(fullReport) {
     url: fullReport.url,
     checkedAt: fullReport.checkedAt,
     overallStatus: fullReport.overallStatus,
+    incomplete: Boolean(fullReport.incomplete),
+    coverage: fullReport.coverage || null,
     categories,
   };
 }

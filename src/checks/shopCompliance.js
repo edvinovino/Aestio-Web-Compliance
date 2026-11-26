@@ -16,6 +16,7 @@ const GRUNDPREIS_PATTERN = /€\s*\/\s*(kg|g|l|ml|m²|m\b)|je\s+(kg|liter|100\s*
 export async function checkShopCompliance(page) {
   const result = {
     errors: [],
+    completed: false,
     shopDetected: false,
     widerrufsbelehrungFound: false,
     widerrufsbelehrungUrl: null,
@@ -46,7 +47,10 @@ export async function checkShopCompliance(page) {
       SHOP_PLATFORM_PATTERN.test(html) ||
       links.some((l) => SHOP_SIGNAL_PATTERN.test(l.text) || SHOP_SIGNAL_PATTERN.test(l.href));
 
-    if (!result.shopDetected) return result;
+    if (!result.shopDetected) {
+      result.completed = true;
+      return result;
+    }
 
     for (const link of links) {
       if (!result.widerrufsbelehrungFound && WIDERRUF_LINK_PATTERN.test(`${link.text} ${link.href}`)) {
@@ -57,6 +61,7 @@ export async function checkShopCompliance(page) {
 
     result.widerrufsButtonFound = buttonTexts.some((t) => WIDERRUF_BUTTON_PATTERN.test(t));
     result.grundpreisHinweisGefunden = GRUNDPREIS_PATTERN.test(bodyText);
+    result.completed = true;
   } catch (err) {
     result.errors.push(`Shop-Compliance-Check-Fehler: ${err.message}`);
   }

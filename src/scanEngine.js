@@ -5,6 +5,7 @@ import { checkLegalTexts } from './checks/legalTexts.js';
 import { checkSecurity } from './checks/security.js';
 import { isChatbotRequest, checkAiTransparency } from './checks/aiTransparency.js';
 import { checkShopCompliance } from './checks/shopCompliance.js';
+import { assertUsableResponse } from './checks/navigation.js';
 import {
   scoreTrackers,
   scoreAccessibility,
@@ -13,6 +14,7 @@ import {
   scoreAiTransparency,
   scoreShopCompliance,
   buildOverallStatus,
+  buildCoverage,
 } from './scoring.js';
 
 async function runAccessibilityAndLegal(browser, targetUrl) {
@@ -29,7 +31,8 @@ async function runAccessibilityAndLegal(browser, targetUrl) {
     // 'networkidle' haengt sich bei Seiten mit dauerhaftem Hintergrund-Traffic
     // (Live-Ticker, Tracking-Beacons, Ads) auf, bis der Timeout greift - 'load'
     // plus fester Wartezeit ist robuster fuer beliebige, unbekannte Websites.
-    await page.goto(targetUrl.toString(), { waitUntil: 'load', timeout: 20000 });
+    const response = await page.goto(targetUrl.toString(), { waitUntil: 'load', timeout: 20000 });
+    assertUsableResponse(response);
     await page.waitForTimeout(2000);
     const [axeResult, legalResult, aiResult, shopResult] = await Promise.all([
       scanAccessibility(page),
@@ -39,11 +42,13 @@ async function runAccessibilityAndLegal(browser, targetUrl) {
     ]);
     return { axeResult, legalResult, aiResult, shopResult };
   } catch (err) {
+    // Fehlgeschlagene Prüfungen sind NICHT bestanden: completed:false => Status 'unknown'.
+    const failure = [`Seitenaufruf fehlgeschlagen: ${err.message}`];
     return {
-      axeResult: { errors: [`Seitenaufruf fehlgeschlagen: ${err.message}`], violationsByImpact: {}, violations: [] },
-      legalResult: { errors: [`Seitenaufruf fehlgeschlagen: ${err.message}`], impressumFound: false, datenschutzFound: false },
-      aiResult: { errors: [`Seitenaufruf fehlgeschlagen: ${err.message}`], chatbotDetected: false, chatbotDomains: [], disclosureFound: false },
-      shopResult: { errors: [`Seitenaufruf fehlgeschlagen: ${err.message}`], shopDetected: false },
+      axeResult: { completed: false, errors: failure, violationsByImpact: {}, violations: [] },
+      legalResult: { completed: false, errors: failure, impressumFound: false, datenschutzFound: false },
+      aiResult: { completed: false, errors: failure, chatbotDetected: false, chatbotDomains: [], disclosureFound: false },
+      shopResult: { completed: false, errors: failure, shopDetected: false },
     };
   } finally {
     await context.close();
@@ -53,15 +58,18 @@ async function runAccessibilityAndLegal(browser, targetUrl) {
 /**
  * Fuehrt den vollstaendigen Compliance-Scan fuer eine validierte URL durch.
  * Startet Browser-Checks und den (browserlosen) Security-Check parallel.
+ * `options.launch` / `options.securityCheck` sind Einhaengepunkte fuer Tests.
  */
-export async function runScan(targetUrl) {
-  const browser = await chromium.launch({ headless: true });
+export async function runScan(targetUrl, options = {}) {
+  const launch = options.launch || (() => chromium.launch({ headless: true }));
+  const securityCheck = options.securityCheck || checkSecurity;
+  const browser = await launch();
 
   try {
     const [cookieResult, { axeResult, legalResult, aiResult, shopResult }, securityResult] = await Promise.all([
       checkCookieConsent(browser, targetUrl),
       runAccessibilityAndLegal(browser, targetUrl),
-      checkSecurity(targetUrl),
+      securityCheck(targetUrl),
     ]);
 
     const categories = {
@@ -74,12 +82,15 @@ export async function runScan(targetUrl) {
 
     // Shop-Compliance ist ein optionales Modul: taucht im Bericht nur auf,
     // wenn ueberhaupt ein Shop/Checkout erkannt wurde, damit reine
-    // Info-Seiten keinen irrelevanten Befund angezeigt bekommen.
-    if (shopResult.shopDetected) {
+    // Info-Seiten keinen irrelevanten Befund angezeigt bekommen. Konnte die Shop-
+    // Erkennung selbst nicht laufen, erscheint der Bereich als "nicht geprüft".
+    if (shopResult.shopDetected || shopResult.completed === false) {
       categories.shopCompliance = { ...scoreShopCompliance(shopResult), details: shopResult };
     }
 
-    const overallStatus = buildOverallStatus(Object.values(categories));
+    const scores = Object.values(categories);
+    const overallStatus = buildOverallStatus(scores);
+    const coverage = buildCoverage(scores);
 
     const errors = [
       ...cookieResult.errors,
@@ -94,6 +105,8 @@ export async function runScan(targetUrl) {
       url: targetUrl.toString(),
       checkedAt: new Date().toISOString(),
       overallStatus,
+      coverage,
+      incomplete: coverage.unknown > 0,
       categories,
       errors,
     };

@@ -85,12 +85,16 @@ function renderCategoryDetails(key, details) {
 }
 
 export function renderReport(data) {
-  const scopeNote = `Umfang: Startseite, ${Object.keys(data.categories || {}).length} Prüfbereiche`;
+  const cov = data.coverage;
+  const scopeNote = cov
+    ? `Umfang: Startseite, ${cov.completed} von ${cov.total} Prüfbereichen vollständig durchgeführt`
+    : `Umfang: Startseite, ${Object.keys(data.categories || {}).length} Prüfbereiche`;
   const overallLabel = {
     green: `Bei den durchgeführten Prüfungen keine kritischen technischen Befunde festgestellt (${scopeNote})`,
     yellow: 'Einzelne Punkte sollten geprüft werden',
     red: 'Kritische technische Befunde festgestellt',
-  }[data.overallStatus];
+    unknown: `Scan unvollständig: nicht alle Prüfbereiche konnten durchgeführt werden (${scopeNote})`,
+  }[data.overallStatus] || 'Gesamtstatus nicht ermittelt';
 
   let html = `
     <div class="report">
@@ -102,6 +106,10 @@ export function renderReport(data) {
         </div>
       </div>
   `;
+
+  if (data.incomplete) {
+    html += `<div class="note" style="margin-top:12px;">Nicht alle Prüfbereiche konnten vollständig durchgeführt werden (grau markiert). Nicht durchgeführte Prüfungen verbessern das Ergebnis nicht; auch bei Rot oder Gelb gilt: Der Scan ist unvollständig.</div>`;
+  }
 
   for (const [key, meta] of Object.entries(CATEGORY_META)) {
     const cat = data.categories[key];

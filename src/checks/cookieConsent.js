@@ -1,3 +1,5 @@
+import { assertUsableResponse } from './navigation.js';
+
 // Bekannte Selektoren gaengiger Consent-Management-Plattformen (CMP) fuer den
 // "Ablehnen / nur notwendige Cookies"-Button. Playwright durchdringt offenes
 // Shadow DOM automatisch bei CSS-Selektoren, daher funktionieren diese auch
@@ -115,6 +117,10 @@ export async function checkCookieConsent(browser, targetUrl) {
 
   const result = {
     errors: [],
+    // completed: Erstbesuch-Beobachtung vollstaendig durchgefuehrt (Seite erreichbar, kein HTTP-Fehler).
+    completed: false,
+    // rejectTest: 'not_run' (kein Ablehnen-Element gefunden), 'done' oder 'check_failed' (Klick gescheitert).
+    rejectTest: 'not_run',
     preConsentExternalDomains: [],
     cookieBannerFound: false,
     cookieBannerRejectWorked: null,
@@ -125,7 +131,8 @@ export async function checkCookieConsent(browser, targetUrl) {
     // 'networkidle' haengt sich bei Seiten mit dauerhaftem Hintergrund-Traffic
     // (Live-Ticker, Tracking-Beacons, Ads) auf, bis der Timeout greift - 'load'
     // plus fester Wartezeit ist robuster fuer beliebige, unbekannte Websites.
-    await page.goto(targetUrl.toString(), { waitUntil: 'load', timeout: 20000 });
+    const response = await page.goto(targetUrl.toString(), { waitUntil: 'load', timeout: 20000 });
+    assertUsableResponse(response);
     await page.waitForTimeout(3000);
 
     // Nach etwaigen Weiterleitungen (z.B. alte Domain -> neue Domain) gilt auch
@@ -142,21 +149,30 @@ export async function checkCookieConsent(browser, targetUrl) {
 
     if (rejectControl) {
       phase = 'post-reject';
+      let clickFailed = false;
       await rejectControl.click({ timeout: 5000 }).catch((e) => {
+        clickFailed = true;
         result.errors.push(`Klick auf Ablehnen-Steuerelement fehlgeschlagen: ${e.message}`);
       });
       await page.waitForTimeout(4000);
 
-      result.newExternalRequestsAfterReject = [
-        ...new Set(
-          postRejectRequests
-            .map((r) => r.domain)
-            .filter((d) => isExternal(d, firstPartyDomains))
-            .filter((d) => !result.preConsentExternalDomains.includes(d))
-        ),
-      ];
-      result.cookieBannerRejectWorked = result.newExternalRequestsAfterReject.length === 0;
+      if (clickFailed) {
+        // Ohne erfolgreichen Klick sagt "keine neuen Requests" nichts ueber die Wirkung des Ablehnens aus.
+        result.rejectTest = 'check_failed';
+      } else {
+        result.rejectTest = 'done';
+        result.newExternalRequestsAfterReject = [
+          ...new Set(
+            postRejectRequests
+              .map((r) => r.domain)
+              .filter((d) => isExternal(d, firstPartyDomains))
+              .filter((d) => !result.preConsentExternalDomains.includes(d))
+          ),
+        ];
+        result.cookieBannerRejectWorked = result.newExternalRequestsAfterReject.length === 0;
+      }
     }
+    result.completed = true;
   } catch (err) {
     result.errors.push(`Crawl-Fehler: ${err.message}`);
   } finally {

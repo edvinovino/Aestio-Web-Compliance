@@ -29,7 +29,12 @@ Verständlichkeitsprüfungen erfordern manuelle Prüfung.
    Art. 50 Abs. 1 EU AI Act, seit 2. August 2026 durchsetzbar).
 
 Jeder Bereich bekommt eine Ampel (grün/gelb/rot), daraus ergibt sich ein
-Gesamtstatus (schlechtester Einzelwert zählt).
+Gesamtstatus (schlechtester Einzelwert zählt). Konnte ein Bereich nicht vollständig
+geprüft werden (Timeout, HTTP-Fehler, Zugriff verweigert, Klick auf "Ablehnen"
+gescheitert), wird er **grau** ("nicht vollständig geprüft", Status `unknown`)
+angezeigt – nie grün. Ein konkreter roter Befund bleibt sichtbar; der Gesamtstatus
+ist dann rot, mit Hinweis auf den unvollständigen Scan. Konnte gar nichts geprüft
+werden, liefert die API einen Fehler statt eines Berichts. Tests: `npm test`.
 
 ## Öffentliche Ansicht vs. Admin-Bereich
 

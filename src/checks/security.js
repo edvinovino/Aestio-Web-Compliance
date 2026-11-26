@@ -9,6 +9,17 @@ const SECURITY_HEADERS = [
   'permissions-policy',
 ];
 
+// Verbindungsprobleme (Server nicht erreichbar, Timeout, DNS) sind KEIN ungueltiges
+// Zertifikat: sie ergeben { valid: null, error } und damit "nicht vollstaendig geprueft".
+const CONNECTION_ERROR_CODES = new Set([
+  'ECONNREFUSED', 'ENOTFOUND', 'EAI_AGAIN', 'ETIMEDOUT', 'ECONNRESET', 'EHOSTUNREACH', 'ENETUNREACH', 'EPIPE',
+]);
+
+function classifyTlsError(err) {
+  if (CONNECTION_ERROR_CODES.has(err.code)) return { valid: null, error: err.message };
+  return { valid: false, reason: err.message };
+}
+
 async function fetchWithTimeout(url, options = {}, timeoutMs = 10000) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
@@ -42,10 +53,10 @@ function getTlsCertificateInfo(hostname) {
         });
       }
     );
-    socket.on('error', (err) => resolve({ valid: false, reason: err.message }));
+    socket.on('error', (err) => resolve(classifyTlsError(err)));
     socket.on('timeout', () => {
       socket.destroy();
-      resolve({ valid: false, reason: 'Zeitüberschreitung bei TLS-Verbindung.' });
+      resolve({ valid: null, error: 'Zeitüberschreitung bei TLS-Verbindung.' });
     });
   });
 }
@@ -57,7 +68,11 @@ function getTlsCertificateInfo(hostname) {
 export async function checkSecurity(targetUrl) {
   const result = {
     errors: [],
+    completed: false,
     httpsEnforced: null,
+    // httpsEnforcedBasis: 'redirect' (Weiterleitung beobachtet), 'content' (HTTP liefert Inhalt),
+    // 'unreachable' (HTTP-Port nicht erreichbar, Weiterleitung NICHT beobachtet) oder null.
+    httpsEnforcedBasis: null,
     certificate: null,
     presentHeaders: [],
     missingHeaders: [],
@@ -79,14 +94,17 @@ export async function checkSecurity(targetUrl) {
     if (res.status >= 300 && res.status < 400) {
       const location = res.headers.get('location') || '';
       result.httpsEnforced = location.startsWith('https://');
+      result.httpsEnforcedBasis = 'redirect';
     } else if (res.status === 200) {
       result.httpsEnforced = false; // Server liefert Inhalt ueber HTTP aus, ohne auf HTTPS umzuleiten
+      result.httpsEnforcedBasis = 'content';
     } else {
       result.httpsEnforced = null;
     }
   } catch (err) {
     // http:// evtl. gar nicht erreichbar (z.B. Server nimmt nur https an) - dann als erzwungen werten
     result.httpsEnforced = targetUrl.protocol === 'https:' ? true : null;
+    if (result.httpsEnforced === true) result.httpsEnforcedBasis = 'unreachable';
     result.errors.push(`HTTP-Redirect-Check: ${err.message}`);
   }
 
@@ -102,6 +120,12 @@ export async function checkSecurity(targetUrl) {
   } catch (err) {
     result.errors.push(`Header-Check-Fehler: ${err.message}`);
   }
+
+  // Vollstaendig nur, wenn Zertifikat (bei https) ohne Verbindungsfehler geprueft wurde und alle
+  // Header ausgewertet werden konnten. Der HTTP-Redirect-Test beeinflusst dies nicht (s. httpsEnforcedBasis).
+  const certificateChecked = targetUrl.protocol !== 'https:' || (result.certificate && !result.certificate.error);
+  const headersChecked = result.presentHeaders.length + result.missingHeaders.length === SECURITY_HEADERS.length;
+  result.completed = Boolean(certificateChecked) && headersChecked;
 
   return result;
 }

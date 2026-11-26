@@ -23,6 +23,7 @@ const IMPACT_LABELS_DE = {
 export async function scanAccessibility(page) {
   const result = {
     errors: [],
+    completed: false,
     violationsByImpact: { critical: 0, serious: 0, moderate: 0, minor: 0 },
     violations: [],
   };
@@ -52,6 +53,7 @@ export async function scanAccessibility(page) {
         nodeCount: v.nodes.length,
       });
     }
+    result.completed = true;
   } catch (err) {
     result.errors.push(`Accessibility-Scan-Fehler: ${err.message}`);
   }

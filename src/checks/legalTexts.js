@@ -9,6 +9,7 @@ const DATENSCHUTZ_PATTERN = /datenschutz|privacy( policy)?/i;
 export async function checkLegalTexts(page) {
   const result = {
     errors: [],
+    completed: false,
     impressumFound: false,
     impressumUrl: null,
     datenschutzFound: false,
@@ -34,6 +35,7 @@ export async function checkLegalTexts(page) {
         result.datenschutzUrl = link.href;
       }
     }
+    result.completed = true;
   } catch (err) {
     result.errors.push(`Rechtstexte-Check-Fehler: ${err.message}`);
   }

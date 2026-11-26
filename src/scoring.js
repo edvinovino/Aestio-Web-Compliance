@@ -1,10 +1,25 @@
-const STATUS_RANK = { green: 0, yellow: 1, red: 2 };
+// Bewertungsregeln. Grundsatz (siehe .claude/skills/aestio-scanner-quality): Eine Prüfung, die
+// nicht vollständig durchgeführt werden konnte (Timeout, HTTP-Fehler, Exception), ergibt
+// niemals green. Sie ergibt 'unknown' ("nicht vollständig geprüft"). Konkrete Befunde (red)
+// bleiben dennoch sichtbar, auch wenn andere Teilprüfungen fehlgeschlagen sind.
+//
+// `completed === false` markiert eine unvollständige Prüfung. `undefined` (Altformat oder
+// Testdaten ohne Flag) wird wie bisher bewertet.
 
-function worstStatus(statuses) {
-  return statuses.reduce((worst, s) => (STATUS_RANK[s] > STATUS_RANK[worst] ? s : worst), 'green');
+function unknown(reason) {
+  return { status: 'unknown', summary: `Nicht vollständig geprüft: ${reason}` };
+}
+
+function isIncomplete(details) {
+  return details?.completed === false;
+}
+
+function reasonOf(details, fallback = 'Prüfung nicht abgeschlossen.') {
+  return details?.errors?.[0] || fallback;
 }
 
 export function scoreTrackers(cc) {
+  if (isIncomplete(cc)) return unknown(reasonOf(cc));
   if (cc.newExternalRequestsAfterReject?.length > 0) {
     return {
       status: 'red',
@@ -16,6 +31,9 @@ export function scoreTrackers(cc) {
       status: 'red',
       summary: `Vor einer Consent-Entscheidung wurden Verbindungen zu ${cc.preConsentExternalDomains.length} externen Domain(s) beobachtet. Ein Ablehnen-Element wurde nicht gefunden.`,
     };
+  }
+  if (cc.cookieBannerFound && cc.rejectTest === 'check_failed') {
+    return unknown('Der Klick auf das Ablehnen-Element ist fehlgeschlagen; die Wirkung des Ablehnens wurde nicht geprüft.');
   }
   if (cc.preConsentExternalDomains.length > 0) {
     return {
@@ -33,6 +51,7 @@ export function scoreTrackers(cc) {
 }
 
 export function scoreAccessibility(axe) {
+  if (isIncomplete(axe)) return unknown(reasonOf(axe));
   const { critical = 0, serious = 0, moderate = 0 } = axe.violationsByImpact || {};
   if (critical > 0) {
     return { status: 'red', summary: `${critical} kritische(s) automatisiert erkannte Barrierefreiheits-Problem(e).` };
@@ -47,6 +66,7 @@ export function scoreAccessibility(axe) {
 }
 
 export function scoreLegalTexts(legal) {
+  if (isIncomplete(legal)) return unknown(reasonOf(legal));
   if (!legal.impressumFound) {
     return { status: 'red', summary: 'Kein Impressum-Link auffindbar.' };
   }
@@ -57,12 +77,14 @@ export function scoreLegalTexts(legal) {
 }
 
 export function scoreSecurity(security) {
+  // Konkrete Befunde zuerst: sie bleiben auch bei fehlgeschlagenen Teilprüfungen gültig.
   if (security.httpsEnforced === false) {
     return { status: 'red', summary: 'HTTP wird nicht automatisch auf HTTPS umgeleitet.' };
   }
   if (security.certificate && security.certificate.valid === false) {
     return { status: 'red', summary: `TLS-Zertifikat ungültig: ${security.certificate.reason || 'abgelaufen/nicht vertrauenswürdig'}.` };
   }
+  if (isIncomplete(security)) return unknown(security.certificate?.error || reasonOf(security));
   if (security.certificate && typeof security.certificate.daysRemaining === 'number' && security.certificate.daysRemaining < 14) {
     return { status: 'yellow', summary: `TLS-Zertifikat läuft in ${security.certificate.daysRemaining} Tag(en) ab.` };
   }
@@ -76,13 +98,20 @@ export function scoreSecurity(security) {
 function describeSecurity(security) {
   const present = security.presentHeaders?.length ?? 0;
   const total = present + (security.missingHeaders?.length ?? 0);
-  const parts = [security.httpsEnforced === true ? 'HTTPS-Weiterleitung beobachtet' : 'HTTPS-Weiterleitung nicht ermittelt'];
+  let https = 'HTTPS-Weiterleitung nicht ermittelt';
+  if (security.httpsEnforced === true) {
+    https = security.httpsEnforcedBasis === 'unreachable'
+      ? 'HTTP-Port nicht erreichbar (Weiterleitung nicht beobachtet)'
+      : 'HTTPS-Weiterleitung beobachtet';
+  }
+  const parts = [https];
   if (security.certificate?.valid === true) parts.push('gültiges Zertifikat beobachtet');
   if (total > 0) parts.push(`${present} von ${total} geprüften Sicherheits-Headern gesetzt`);
   return `${parts.join('; ')}.`;
 }
 
 export function scoreAiTransparency(ai) {
+  if (isIncomplete(ai)) return unknown(reasonOf(ai));
   if (ai.chatbotDetected && !ai.disclosureFound) {
     return {
       status: 'yellow',
@@ -102,6 +131,7 @@ export function scoreAiTransparency(ai) {
 }
 
 export function scoreShopCompliance(shop) {
+  if (isIncomplete(shop)) return unknown(`Shop-Erkennung nicht durchgeführt: ${reasonOf(shop)}`);
   if (!shop.widerrufsbelehrungFound) {
     return { status: 'red', summary: 'Shop/Checkout erkannt, aber keine Widerrufsbelehrung auffindbar.' };
   }
@@ -114,6 +144,21 @@ export function scoreShopCompliance(shop) {
   return { status: 'green', summary: 'Widerrufsbelehrung und ein klar beschrifteter Widerrufs-Button sind auffindbar.' };
 }
 
+/**
+ * Gesamtstatus: ein konkreter Befund (red) schlaegt "unvollstaendig"; sonst gilt
+ * unknown vor yellow vor green. Nicht geprüfte Bereiche verbessern das Ergebnis nie.
+ */
 export function buildOverallStatus(categoryScores) {
-  return worstStatus(categoryScores.map((c) => c.status));
+  const statuses = categoryScores.map((c) => c.status);
+  if (statuses.includes('red')) return 'red';
+  if (statuses.includes('unknown')) return 'unknown';
+  if (statuses.includes('yellow')) return 'yellow';
+  return 'green';
+}
+
+/** Prüfumfang: wie viele Bereiche konnten vollständig geprüft werden. */
+export function buildCoverage(categoryScores) {
+  const total = categoryScores.length;
+  const unknownCount = categoryScores.filter((c) => c.status === 'unknown').length;
+  return { total, completed: total - unknownCount, unknown: unknownCount };
 }

@@ -232,6 +232,8 @@
   .mockup-led.green{background:#4C8B5A;box-shadow:0 0 8px rgba(76,139,90,.5);}
   .mockup-led.yellow{background:var(--gold-light);box-shadow:0 0 8px rgba(212,183,124,.5);}
   .mockup-led.red{background:#C1554A;box-shadow:0 0 8px rgba(193,85,74,.5);}
+  .mockup-led.unknown{background:#8A8F98;}
+  .mockup-note{margin-top:14px;font-size:12.5px;color:#B7BECC;line-height:1.5;}
   .mockup-row span{color:#DADFE8;}
   .mockup-footer{
     padding:16px 24px;background:rgba(255,255,255,.03);
@@ -825,7 +827,11 @@
         const cat = data.categories[key];
         return `<div class="mockup-row"><span class="mockup-led ${cat.status}"></span><span>${label}</span></div>`;
       }).join('');
-      document.getElementById('resultRows').innerHTML = rowsHtml;
+      const hasUnknown = Object.keys(CATEGORY_LABELS).some((key) => data.categories[key]?.status === 'unknown');
+      const noteHtml = hasUnknown
+        ? '<div class="mockup-note">Grau: Dieser Bereich konnte nicht vollständig geprüft werden. Das ist kein Entwarnungs-Ergebnis.</div>'
+        : '';
+      document.getElementById('resultRows').innerHTML = rowsHtml + noteHtml;
       document.getElementById('stateLoading').style.display = 'none';
       document.getElementById('stateResult').style.display = 'block';
     } catch (err) {
